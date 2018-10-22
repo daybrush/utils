@@ -1,0 +1,88 @@
+<script src="../release/latest/shapepoly.min.js"></script>
+<style>
+.__shape-poly, .star {
+  display: inline-block;
+  position: relative;
+  width: 100px;
+  border: 1px solid black;
+}
+.percent-vertical {
+  width: 100px;
+}
+.star .__shape-poly-side {
+  transition: all ease 0.5s;
+}
+</style>
+<div id="poly3"></div>
+<div id="poly4"></div>
+<div id="poly5"></div>
+<div id="poly6"></div>
+<div id="poly7"></div>
+<div id="poly8"></div>
+<div id="poly9"></div>
+<div id="poly10"></div>
+
+<script>
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333"}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "left"}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "right"}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "top"}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "left", split: 2}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "top", split: 2}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "top", starRadius: 30}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "bottom", starRadius: 20}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "bottom", starRadius: 10}));
+  poly3.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", direction: "bottom", starRadius: 40}));
+
+  poly4.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 4}));
+  poly4.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 4, starRadius: 10}));
+  poly4.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 4, starRadius: 30}));
+  poly4.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 4, starRadius: 50}));
+  poly4.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 4, split: 2, starRadius: 30}));
+  poly4.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 4, split: 3, starRadius: 50}));
+
+
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, split: 2}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, split: 3}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, split: 4, direction: "left"}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, starRadius: 20}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, split: 3, starRadius: 20}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, direction: "left"}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, direction: "right"}));
+  poly5.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 5, direction: "top"}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6, split: 2}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6, split: 1, direction: "left"}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6, split: 3, direction: "left"}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6, split: 3, direction: "right"}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6, split: 3, direction: "top"}));
+  poly6.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 6, split: 3, direction: "top", starRadius: 40}));
+
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7}));
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7, split: 2}));
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7, split: 3}));
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7, direction: "left"}));
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7, split: 2, direction: "right"}));
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7, direction: "top"}));
+  poly7.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 7, direction: "top", starRadius: 40}));
+  poly8.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 8}));
+  poly8.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 8, split: 2}));
+  poly8.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 8, split: 2, direction: "left"}));
+  poly8.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 8, split: 2, direction: "right"}));
+  poly8.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 8, split: 2}));
+  poly8.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 8, split: 2, starRadius: 40}));
+  poly9.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 9}));
+  poly9.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 9, starRadius: 40}));
+  // container.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 9, split: 2}));
+  // container.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 10}));
+  poly10.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 10, split: 2}));
+  poly10.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 10, split: 3}));
+  poly10.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 10, split: 1, direction: "left"}));
+  poly10.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 10, split: 2, direction: "top"}));
+  poly10.appendChild(ShapePoly.poly({strokeWidth: "10px", stroke: "#333", side: 10, split: 2, direction: "right"}));
+
+
+  const p10 = ShapePoly.poly({className: "star", strokeWidth: "10px", stroke: "#333", side: 10, split: 2, direction: "right"});
+  poly10.appendChild(p10);
+</script>
