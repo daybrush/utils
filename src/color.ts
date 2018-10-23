@@ -139,9 +139,11 @@ export function stringToRGBA(color: string) {
         return colorArr;
       case HSL:
       case HSLA:
-        for (let i = 1; i < length; ++i) {
+        for (let i = 0; i < length; ++i) {
           if (arr[i].indexOf("%") !== -1) {
             colorArr[i] = parseFloat(arr[i]) / 100;
+          } else {
+            colorArr[i] = parseFloat(arr[i]);
           }
         }
         // hsl, hsla to rgba
