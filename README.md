@@ -1,4 +1,4 @@
-# @daybrush/utils  [![npm version](https://badge.fury.io/js/%40daybrush$2Futils.svg)](https://badge.fury.io/js/%40daybrush$2Futils)
+# @daybrush/utils  [![npm version](https://badge.fury.io/js/%40daybrush%2Futils.svg)](https://badge.fury.io/js/%40daybrush%2Futils)
 
 
 utils for daybrush
