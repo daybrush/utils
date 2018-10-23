@@ -1,7 +1,9 @@
+import { ObjectInterface } from "./consts";
+
 export function isUndefined(value: any): value is undefined {
   return (typeof value === "undefined");
 }
-export function isObject(value: any): value is object {
+export function isObject(value: any): value is ObjectInterface<any> {
   return value && (typeof value === "object");
 }
 export function isArray(value: any): value is any[] {
