@@ -4,6 +4,9 @@ export interface ObjectInterface<T> {
 
 const prefixes: string[] = ["webkit", "ms", "moz", "o"];
 const checkProperties =  /*#__PURE__*/(property: string) => {
+  if (typeof document === "undefined") {
+    return "";
+  }
   const styles = (document.body || document.documentElement).style as any;
   const length = prefixes.length;
 

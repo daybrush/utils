@@ -80,13 +80,13 @@ export function decamelize(str: string) {
 export function now() {
   return Date.now ? Date.now() : new Date().getTime();
 }
-export const requestAnimFrame = /*#__PURE__*/(() => {
+export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
+  const raf = typeof window !== "undefined" &&
+    (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
+      (window as any).mozRequestAnimationFrame);
 
-  return window.requestAnimationFrame ||
-    window.webkitRequestAnimationFrame ||
-    ((window as any).mozRequestAnimationFrame as (callback: FrameRequestCallback) => number) ||
-    ((callback: FrameRequestCallback) => {
+  return raf ? (raf.bind(window) as (callback: FrameRequestCallback) => number) : ((callback: FrameRequestCallback) => {
       const currTime = now();
       const id = window.setTimeout(() => {
         callback(currTime - firstTime);
