@@ -83,10 +83,10 @@ export function now() {
 export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
 
-  return (window as any).requestAnimationFrame ||
-    (window as any).webkitRequestAnimationFrame ||
-    (window as any).mozRequestAnimationFrame ||
-    ((callback: (time: number) => void) => {
+  return window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    ((window as any).mozRequestAnimationFrame as (callback: FrameRequestCallback) => number) ||
+    ((callback: FrameRequestCallback) => {
       const currTime = now();
       const id = window.setTimeout(() => {
         callback(currTime - firstTime);
