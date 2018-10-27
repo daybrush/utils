@@ -77,3 +77,20 @@ export function camelize(str: string) {
 export function decamelize(str: string) {
   return str.replace(/([a-z])([A-Z])/g, (all, letter, letter2) => `${letter}-${letter2.toLowerCase()}`);
 }
+export function now() {
+  return Date.now ? Date.now() : new Date().getTime();
+}
+export const requestAnimationFrame = /*#__PURE__*/(() => {
+  const firstTime = now();
+
+  return (window as any).requestAnimationFrame ||
+    (window as any).webkitRequestAnimationFrame ||
+    (window as any).mozRequestAnimationFrame ||
+    ((callback: (time: number) => void) => {
+      const currTime = now();
+      const id = window.setTimeout(() => {
+        callback(currTime - firstTime);
+      }, 1000 / 60);
+      return id;
+    });
+})();
