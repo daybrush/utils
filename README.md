@@ -30,4 +30,4 @@ utils for daybrush
 * removeClass,
 * addClass,
 * fromCSS,
-* requestAnimationFrame
+* requestAnimFrame( = requestAnimationFrame)

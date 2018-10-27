@@ -80,7 +80,7 @@ export function decamelize(str: string) {
 export function now() {
   return Date.now ? Date.now() : new Date().getTime();
 }
-export const requestAnimationFrame = /*#__PURE__*/(() => {
+export const requestAnimFrame = /*#__PURE__*/(() => {
   const firstTime = now();
 
   return window.requestAnimationFrame ||
