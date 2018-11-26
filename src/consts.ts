@@ -1,6 +1,6 @@
 /**
 * @namespace
-* @name consts
+* @name Consts
 */
 
 export interface ObjectInterface<T> {
@@ -9,7 +9,7 @@ export interface ObjectInterface<T> {
 
 /**
 * get string "rgb"
-* @memberof consts
+* @memberof Color
 * @example
 import {RGB} from "@daybrush/utils";
 
@@ -18,7 +18,7 @@ console.log(RGB); // "rgb"
 export const RGB = "rgb";
 /**
 * get string "rgba"
-* @memberof consts
+* @memberof Color
 * @example
 import {RGBA} from "@daybrush/utils";
 
@@ -27,7 +27,7 @@ console.log(RGBA); // "rgba"
 export const RGBA = "rgba";
 /**
 * get string "hsl"
-* @memberof consts
+* @memberof Color
 * @example
 import {HSL} from "@daybrush/utils";
 
@@ -36,7 +36,7 @@ console.log(HSL); // "hsl"
 export const HSL = "hsl";
 /**
 * get string "hsla"
-* @memberof consts
+* @memberof Color
 * @example
 import {HSLA} from "@daybrush/utils";
 
@@ -45,7 +45,7 @@ console.log(HSLA); // "hsla"
 export const HSLA = "hsla";
 /**
 * gets an array of color models.
-* @memberof consts
+* @memberof Color
 * @example
 import {COLOR_MODELS} from "@daybrush/utils";
 
@@ -55,7 +55,7 @@ export const COLOR_MODELS = [RGB, RGBA, HSL, HSLA];
 
 /**
 * get string "function"
-* @memberof consts
+* @memberof Consts
 * @example
 import {FUNCTION} from "@daybrush/utils";
 
@@ -64,7 +64,7 @@ console.log(FUNCTION); // "function"
 export const FUNCTION = "function";
 /**
 * get string "property"
-* @memberof consts
+* @memberof Consts
 * @example
 import {PROPERTY} from "@daybrush/utils";
 
@@ -73,7 +73,7 @@ console.log(PROPERTY); // "property"
 export const PROPERTY = "property";
 /**
 * get string "array"
-* @memberof consts
+* @memberof Consts
 * @example
 import {ARRAY} from "@daybrush/utils";
 
@@ -82,7 +82,7 @@ console.log(ARRAY); // "array"
 export const ARRAY = "array";
 /**
 * get string "object"
-* @memberof consts
+* @memberof Consts
 * @example
 import {OBJECT} from "@daybrush/utils";
 
@@ -91,7 +91,7 @@ console.log(OBJECT); // "object"
 export const OBJECT = "object";
 /**
 * get string "string"
-* @memberof consts
+* @memberof Consts
 * @example
 import {STRING} from "@daybrush/utils";
 
@@ -100,7 +100,7 @@ console.log(STRING); // "string"
 export const STRING = "string";
 /**
 * get string "number"
-* @memberof consts
+* @memberof Consts
 * @example
 import {NUMBER} from "@daybrush/utils";
 
@@ -109,7 +109,7 @@ console.log(NUMBER); // "number"
 export const NUMBER = "number";
 /**
 * get string "undefined"
-* @memberof consts
+* @memberof Consts
 * @example
 import {UNDEFINED} from "@daybrush/utils";
 

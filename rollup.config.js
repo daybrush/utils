@@ -1,5 +1,7 @@
 import typescript from 'rollup-plugin-typescript';
 import PrototypeMinify from "rollup-plugin-prototype-minify";
+import es3 from "rollup-plugin-es3";
+
 
 const merge = require("./config/merge");
 const banner = require("./config/banner");
@@ -12,9 +14,10 @@ const plugin = typescript({
 });
 const defaultConfig = {
   plugins: [
-    plugin, PrototypeMinify({sourcemap: true})
+    plugin, PrototypeMinify({sourcemap: true}), es3({sourcemap: true}),
   ],
   output: {
+    banner,
     format: "es",
     freeze: false,
     exports: "named",
@@ -29,10 +32,12 @@ export default [
     output: {
       file: `./dist/utils.esm.js`,
     },
-  }, {
+  },
+  {
     input: 'src/index.ts',
     output: {
-      format: "cjs",
+      format: "umd",
+      name: "utils",
       file: `./dist/utils.js`,
     },
   },

@@ -1,8 +1,12 @@
 import { ObjectInterface, UNDEFINED, STRING, OBJECT } from "./consts";
+/**
+* @namespace
+* @name Utils
+*/
 
 /**
 * Check the type that the value is undefined.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -18,7 +22,7 @@ export function isUndefined(value: any): value is undefined {
 }
 /**
 * Check the type that the value is object.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -34,7 +38,7 @@ export function isObject(value: any): value is ObjectInterface<any> {
 }
 /**
 * Check the type that the value is isArray.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -50,7 +54,7 @@ export function isArray(value: any): value is any[] {
 }
 /**
 * Check the type that the value is string.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -66,7 +70,7 @@ export function isString(value: any): value is string {
 }
 /**
 * divide text by space.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {Array} divided texts
 * @example
@@ -85,7 +89,7 @@ export function splitSpace(text: string) {
 }
 /**
 * divide text by comma.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {Array} divided texts
 * @example
@@ -105,7 +109,7 @@ export function splitComma(text: string) {
 }
 /**
 * divide text by bracket "(", ")".
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {object} divided texts
 * @example
@@ -127,7 +131,7 @@ export function splitBracket(text: string) {
 }
 /**
 * divide text by number and unit.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {object} divided texts
 * @example
@@ -155,7 +159,7 @@ export function splitUnit(text: string) {
 
 /**
 * transform strings to camel-case
-* @memberof utils
+* @memberof Utils
 * @param {String} text - string
 * @return {String} camel-case string
 * @example
@@ -170,7 +174,7 @@ export function camelize(str: string) {
 }
 /**
 * transform a camelized string into a lowercased string.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - a camel-cased string
 * @param {string} [separator="-"] - a separator
 * @return {string}  a lowercased string
