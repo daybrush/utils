@@ -14,7 +14,7 @@ const plugin = typescript({
 });
 const defaultConfig = {
   plugins: [
-    plugin, PrototypeMinify({sourcemap: true}), es3({sourcemap: true}),
+    plugin, PrototypeMinify({sourcemap: true}),
   ],
   output: {
     banner,
@@ -35,6 +35,7 @@ export default [
   },
   {
     input: 'src/index.ts',
+    plugins: [es3({sourcemap: true})],
     output: {
       format: "umd",
       name: "utils",
