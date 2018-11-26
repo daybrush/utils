@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>color.ts - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/custom.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="description" content="color.ts - Documentation"/>
+
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><ul class="namespaces"><li file="color"><a href="Color.html">Color</a><h4><a href="Color.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="Color.html#.exports.cutHex">cutHex</a></li><li data-type='method'><a href="Color.html#.exports.hexToRGBA">hexToRGBA</a></li><li data-type='method'><a href="Color.html#.exports.hslToRGBA">hslToRGBA</a></li><li data-type='method'><a href="Color.html#.exports.stringToRGBA">stringToRGBA</a></li><li data-type='method'><a href="Color.html#.exports.toFullHex">toFullHex</a></li></ul></li><li file="consts"><a href="consts.html">consts</a><h4><a href="consts.html#static members">Static Members</a></h4><ul class='static members'><li data-type='member'><a href="consts.html#.exports.ARRAY">ARRAY</a></li><li data-type='member'><a href="consts.html#.exports.COLOR_MODELS">COLOR_MODELS</a></li><li data-type='member'><a href="consts.html#.exports.FUNCTION">FUNCTION</a></li><li data-type='member'><a href="consts.html#.exports.HSL">HSL</a></li><li data-type='member'><a href="consts.html#.exports.HSLA">HSLA</a></li><li data-type='member'><a href="consts.html#.exports.NUMBER">NUMBER</a></li><li data-type='member'><a href="consts.html#.exports.OBJECT">OBJECT</a></li><li data-type='member'><a href="consts.html#.exports.PROPERTY">PROPERTY</a></li><li data-type='member'><a href="consts.html#.exports.RGB">RGB</a></li><li data-type='member'><a href="consts.html#.exports.RGBA">RGBA</a></li><li data-type='member'><a href="consts.html#.exports.STRING">STRING</a></li><li data-type='member'><a href="consts.html#.exports.UNDEFINED">UNDEFINED</a></li></ul></li><li file="crossbrowser"><a href="CrossBrowser.html">CrossBrowser</a><h4><a href="CrossBrowser.html#static members">Static Members</a></h4><ul class='static members'><li data-type='member'><a href="CrossBrowser.html#.exports.ANIMATION">ANIMATION</a></li><li data-type='member'><a href="CrossBrowser.html#.exports.FILTER">FILTER</a></li><li data-type='member'><a href="CrossBrowser.html#.exports.KEYFRAMES">KEYFRAMES</a></li><li data-type='member'><a href="CrossBrowser.html#.exports.TRANSFORM">TRANSFORM</a></li></ul><h4><a href="CrossBrowser.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="CrossBrowser.html#.exports.getCrossBrowserProperty">getCrossBrowserProperty</a></li><li data-type='method'><a href="CrossBrowser.html#.exports.now">now</a></li><li data-type='method'><a href="CrossBrowser.html#.exports.requestAnimationFrame">requestAnimationFrame</a></li></ul></li><li file="dom"><a href="DOM.html">DOM</a><h4><a href="DOM.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="DOM.html#.exports.addClass">addClass</a></li><li data-type='method'><a href="DOM.html#.exports.fromCSS">fromCSS</a></li><li data-type='method'><a href="DOM.html#.exports.hasClass">hasClass</a></li><li data-type='method'><a href="DOM.html#.exports.removeClass">removeClass</a></li></ul></li><li file="utils"><a href="utils.html">utils</a><h4><a href="utils.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="utils.html#.exports.camelize">camelize</a></li><li data-type='method'><a href="utils.html#.exports.decamelize">decamelize</a></li><li data-type='method'><a href="utils.html#.exports.isArray">isArray</a></li><li data-type='method'><a href="utils.html#.exports.isObject">isObject</a></li><li data-type='method'><a href="utils.html#.exports.isString">isString</a></li><li data-type='method'><a href="utils.html#.exports.isUndefined">isUndefined</a></li><li data-type='method'><a href="utils.html#.exports.splitBracket">splitBracket</a></li><li data-type='method'><a href="utils.html#.exports.splitComma">splitComma</a></li><li data-type='method'><a href="utils.html#.exports.splitSpace">splitSpace</a></li><li data-type='method'><a href="utils.html#.exports.splitUnit">splitUnit</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">color.ts</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { RGB, RGBA, HSL, HSLA } from "./consts";
+import { splitBracket, splitComma } from "./utils";
+
+/**
+* @namespace
+* @name Color
+*/
+
+/**
+* Remove the # from the hex color.
+* @memberof Color
+* @param {string} hex - hex color
+* @return {string} hex color
+* @example
+import {cutHex} from "@daybrush/utils";
+
+console.log(cutHex("#000000")) // "000000"
+*/
+export function cutHex(hex: string) {
+  return hex.replace("#", "");
+}
+/**
+* convert hex color to rgb color.
+* @memberof Color
+* @param {String} hex - hex color
+* @return {Array} rgb color
+* @example
+import {hexToRGBA} from "@daybrush/utils";
+
+console.log(hexToRGBA("#00000005"));
+// [0, 0, 0, 1]
+console.log(hexToRGBA("#201045"));
+// [32, 16, 69, 1]
+*/
+export function hexToRGBA(hex: string) {
+  const h = cutHex(hex);
+  const r = parseInt(h.substring(0, 2), 16);
+  const g = parseInt(h.substring(2, 4), 16);
+  const b = parseInt(h.substring(4, 6), 16);
+  let a = parseInt(h.substring(6, 8), 16) / 255;
+
+  if (isNaN(a)) {
+    a = 1;
+  }
+  return [r, g, b, a];
+}
+
+/**
+* convert 3(or 4)-digit hex color to 6(or 8)-digit hex color.
+* @memberof Color
+* @param {String} hex - 3(or 4)-digit hex color
+* @return {String} 6(or 8)-digit hex color
+* @example
+import {toFullHex} from "@daybrush/utils";
+
+console.log(toFullHex("#123")); // "#112233"
+console.log(toFullHex("#123a")); // "#112233aa"
+*/
+export function toFullHex(h: string) {
+  const r = h.charAt(1);
+  const g = h.charAt(2);
+  const b = h.charAt(3);
+  const a = h.charAt(4);
+  const arr = ["#", r, r, g, g, b, b, a, a];
+
+  return arr.join("");
+}
+/**
+* convert hsl color to rgba color.
+* @memberof Color
+* @param {Array} hsl(a) - hsl color(hue: 0 ~ 360, saturation: 0 ~ 1, lightness: 0 ~ 1, alpha: 0 ~ 1)
+* @return {Array} rgba color
+* @example
+import {hslToRGBA} from "@daybrush/utils";
+
+console.log(hslToRGBA([150, 0.5, 0.4]));
+// [51, 153, 102, 1]
+*/
+export function hslToRGBA(hsl: number[]) {
+  let h = hsl[0];
+  const s = hsl[1];
+  const l = hsl[2];
+
+  if (h &lt; 0) {
+    h +=  Math.floor((Math.abs(h) + 360) / 360) * 360;
+  }
+  h %= 360;
+
+  const c = (1 - Math.abs(2 * l - 1)) * s;
+  const x = c * (1 - Math.abs((h / 60) % 2 - 1));
+  const m = l - c / 2;
+  let rgb;
+
+  if (h &lt; 60) {
+    rgb = [c, x, 0];
+  } else if (h &lt; 120) {
+    rgb = [x, c, 0];
+  } else if (h &lt; 180) {
+    rgb = [0, c, x];
+  } else if (h &lt; 240) {
+    rgb = [0, x, c];
+  } else if (h &lt; 300) {
+    rgb = [x, 0, c];
+  } else if (h &lt; 360) {
+    rgb = [c, 0, x];
+  }
+  const result = [
+    Math.round((rgb[0] + m) * 255),
+    Math.round((rgb[1] + m) * 255),
+    Math.round((rgb[2] + m) * 255),
+    hsl.length > 3 ? hsl[3] : 1,
+  ];
+
+  return result;
+}
+/**
+* convert string to rgba color.
+* @memberof Color
+* @param {String} - 3-hex(#000), 4-hex(#0000) 6-hex(#000000), 8-hex(#00000000) or RGB(A), or HSL(A)
+* @return {Array} rgba color
+* @example
+import {stringToRGBA} from "@daybrush/utils";
+
+console.log(stringToRGBA("#000000")); // [0, 0, 0, 1]
+console.log(stringToRGBA("rgb(100, 100, 100)")); // [100, 100, 100, 1]
+console.log(stringToRGBA("hsl(150, 0.5, 0.4)")); // [51, 153, 102, 1]
+*/
+export function stringToRGBA(color: string) {
+  if (color.charAt(0) === "#") {
+    if (color.length === 4 || color.length === 5) {
+      return hexToRGBA(toFullHex(color));
+    } else {
+      return hexToRGBA(color);
+    }
+  } else if (color.indexOf("(") !== -1) {
+    // in bracket.
+    const {prefix, value} = splitBracket(color);
+
+    if (!prefix || !value) {
+      return;
+    }
+    const arr = splitComma(value);
+    const colorArr: number[] = [];
+    const length = arr.length;
+
+    switch (prefix) {
+      case RGB:
+      case RGBA:
+        for (let i = 0; i &lt; length; ++i) {
+          colorArr[i] = parseFloat(arr[i]);
+        }
+        return colorArr;
+      case HSL:
+      case HSLA:
+        for (let i = 0; i &lt; length; ++i) {
+          if (arr[i].indexOf("%") !== -1) {
+            colorArr[i] = parseFloat(arr[i]) / 100;
+          } else {
+            colorArr[i] = parseFloat(arr[i]);
+          }
+        }
+        // hsl, hsla to rgba
+        return hslToRGBA(colorArr);
+    }
+  }
+  return;
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+
+<style>
+
+
+nav li[file="color"]:after {
+    display: none;
+}
+nav li[file="color"] h4, nav li[file="color"] ul {
+    display: block;
+}
+</style>
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.2.1</a> on Mon Nov 26 2018 13:29:58 GMT+0900 (Korean Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>

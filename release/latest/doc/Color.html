@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Color - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/custom.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <meta name="description" content="Color - Documentation"/>
+
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><ul class="namespaces"><li file="color"><a href="Color.html">Color</a><h4><a href="Color.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="Color.html#.exports.cutHex">cutHex</a></li><li data-type='method'><a href="Color.html#.exports.hexToRGBA">hexToRGBA</a></li><li data-type='method'><a href="Color.html#.exports.hslToRGBA">hslToRGBA</a></li><li data-type='method'><a href="Color.html#.exports.stringToRGBA">stringToRGBA</a></li><li data-type='method'><a href="Color.html#.exports.toFullHex">toFullHex</a></li></ul></li><li file="consts"><a href="consts.html">consts</a><h4><a href="consts.html#static members">Static Members</a></h4><ul class='static members'><li data-type='member'><a href="consts.html#.exports.ARRAY">ARRAY</a></li><li data-type='member'><a href="consts.html#.exports.COLOR_MODELS">COLOR_MODELS</a></li><li data-type='member'><a href="consts.html#.exports.FUNCTION">FUNCTION</a></li><li data-type='member'><a href="consts.html#.exports.HSL">HSL</a></li><li data-type='member'><a href="consts.html#.exports.HSLA">HSLA</a></li><li data-type='member'><a href="consts.html#.exports.NUMBER">NUMBER</a></li><li data-type='member'><a href="consts.html#.exports.OBJECT">OBJECT</a></li><li data-type='member'><a href="consts.html#.exports.PROPERTY">PROPERTY</a></li><li data-type='member'><a href="consts.html#.exports.RGB">RGB</a></li><li data-type='member'><a href="consts.html#.exports.RGBA">RGBA</a></li><li data-type='member'><a href="consts.html#.exports.STRING">STRING</a></li><li data-type='member'><a href="consts.html#.exports.UNDEFINED">UNDEFINED</a></li></ul></li><li file="crossbrowser"><a href="CrossBrowser.html">CrossBrowser</a><h4><a href="CrossBrowser.html#static members">Static Members</a></h4><ul class='static members'><li data-type='member'><a href="CrossBrowser.html#.exports.ANIMATION">ANIMATION</a></li><li data-type='member'><a href="CrossBrowser.html#.exports.FILTER">FILTER</a></li><li data-type='member'><a href="CrossBrowser.html#.exports.KEYFRAMES">KEYFRAMES</a></li><li data-type='member'><a href="CrossBrowser.html#.exports.TRANSFORM">TRANSFORM</a></li></ul><h4><a href="CrossBrowser.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="CrossBrowser.html#.exports.getCrossBrowserProperty">getCrossBrowserProperty</a></li><li data-type='method'><a href="CrossBrowser.html#.exports.now">now</a></li><li data-type='method'><a href="CrossBrowser.html#.exports.requestAnimationFrame">requestAnimationFrame</a></li></ul></li><li file="dom"><a href="DOM.html">DOM</a><h4><a href="DOM.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="DOM.html#.exports.addClass">addClass</a></li><li data-type='method'><a href="DOM.html#.exports.fromCSS">fromCSS</a></li><li data-type='method'><a href="DOM.html#.exports.hasClass">hasClass</a></li><li data-type='method'><a href="DOM.html#.exports.removeClass">removeClass</a></li></ul></li><li file="utils"><a href="utils.html">utils</a><h4><a href="utils.html#static methods">Static Methods</a></h4><ul class='static methods'><li data-type='method'><a href="utils.html#.exports.camelize">camelize</a></li><li data-type='method'><a href="utils.html#.exports.decamelize">decamelize</a></li><li data-type='method'><a href="utils.html#.exports.isArray">isArray</a></li><li data-type='method'><a href="utils.html#.exports.isObject">isObject</a></li><li data-type='method'><a href="utils.html#.exports.isString">isString</a></li><li data-type='method'><a href="utils.html#.exports.isUndefined">isUndefined</a></li><li data-type='method'><a href="utils.html#.exports.splitBracket">splitBracket</a></li><li data-type='method'><a href="utils.html#.exports.splitComma">splitComma</a></li><li data-type='method'><a href="utils.html#.exports.splitSpace">splitSpace</a></li><li data-type='method'><a href="utils.html#.exports.splitUnit">splitUnit</a></li></ul></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Color</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>
+        Color
+        </h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="color.ts.html">color.ts</a>, <a href="color.ts.html#line4">line 4</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title" id="methods">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".exports.cutHex"><span class="type-signature">(static) </span>cutHex<span class="signature">(hex)</span><span class="type-signature"> &rarr; {string}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="color.ts.html">color.ts</a>, <a href="color.ts.html#line19">line 19</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    Remove the # from the hex color.
+</div>
+
+
+
+
+
+
+
+
+
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">string</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hex color</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import {cutHex} from "@daybrush/utils";
+
+console.log(cutHex("#000000")) // "000000"</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    hex color
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">string</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".exports.hexToRGBA"><span class="type-signature">(static) </span>hexToRGBA<span class="signature">(hex)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="color.ts.html">color.ts</a>, <a href="color.ts.html#line35">line 35</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    convert hex color to rgb color.
+</div>
+
+
+
+
+
+
+
+
+
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hex color</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import {hexToRGBA} from "@daybrush/utils";
+
+console.log(hexToRGBA("#00000005"));
+// [0, 0, 0, 1]
+console.log(hexToRGBA("#201045"));
+// [32, 16, 69, 1]</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    rgb color
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".exports.hslToRGBA"><span class="type-signature">(static) </span>hslToRGBA<span class="signature">(hsl(a))</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="color.ts.html">color.ts</a>, <a href="color.ts.html#line79">line 79</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    convert hsl color to rgba color.
+</div>
+
+
+
+
+
+
+
+
+
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hsl(a)</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">hsl color(hue: 0 ~ 360, saturation: 0 ~ 1, lightness: 0 ~ 1, alpha: 0 ~ 1)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import {hslToRGBA} from "@daybrush/utils";
+
+console.log(hslToRGBA([150, 0.5, 0.4]));
+// [51, 153, 102, 1]</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    rgba color
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".exports.stringToRGBA"><span class="type-signature">(static) </span>stringToRGBA<span class="signature">(color)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="color.ts.html">color.ts</a>, <a href="color.ts.html#line128">line 128</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    convert string to rgba color.
+</div>
+
+
+
+
+
+
+
+
+
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">3-hex(#000), 4-hex(#0000) 6-hex(#000000), 8-hex(#00000000) or RGB(A), or HSL(A)</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import {stringToRGBA} from "@daybrush/utils";
+
+console.log(stringToRGBA("#000000")); // [0, 0, 0, 1]
+console.log(stringToRGBA("rgb(100, 100, 100)")); // [100, 100, 100, 1]
+console.log(stringToRGBA("hsl(150, 0.5, 0.4)")); // [51, 153, 102, 1]</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    rgba color
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".exports.toFullHex"><span class="type-signature">(static) </span>toFullHex<span class="signature">(hex)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="color.ts.html">color.ts</a>, <a href="color.ts.html#line59">line 59</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description">
+    convert 3(or 4)-digit hex color to 6(or 8)-digit hex color.
+</div>
+
+
+
+
+
+
+
+
+
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>hex</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last">3(or 4)-digit hex color</td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import {toFullHex} from "@daybrush/utils";
+
+console.log(toFullHex("#123")); // "#112233"
+console.log(toFullHex("#123a")); // "#112233aa"</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    6(or 8)-digit hex color
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+
+<style>
+
+
+nav li[file="color"]:after {
+    display: none;
+}
+nav li[file="color"] h4, nav li[file="color"] ul {
+    display: block;
+}
+</style>
+
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 0.2.1</a> on Mon Nov 26 2018 13:29:58 GMT+0900 (Korean Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
