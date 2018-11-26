@@ -1,11 +1,18 @@
+/*
+Copyright (c) 2018 Daybrush
+license: MIT
+author: Daybrush
+repository: https://github.com/daybrush/utils
+@version 0.1.3
+*/
 /**
 * @namespace
-* @name consts
+* @name Consts
 */
 
 /**
 * get string "rgb"
-* @memberof consts
+* @memberof Color
 * @example
 import {RGB} from "@daybrush/utils";
 
@@ -14,7 +21,7 @@ console.log(RGB); // "rgb"
 var RGB = "rgb";
 /**
 * get string "rgba"
-* @memberof consts
+* @memberof Color
 * @example
 import {RGBA} from "@daybrush/utils";
 
@@ -24,7 +31,7 @@ console.log(RGBA); // "rgba"
 var RGBA = "rgba";
 /**
 * get string "hsl"
-* @memberof consts
+* @memberof Color
 * @example
 import {HSL} from "@daybrush/utils";
 
@@ -34,7 +41,7 @@ console.log(HSL); // "hsl"
 var HSL = "hsl";
 /**
 * get string "hsla"
-* @memberof consts
+* @memberof Color
 * @example
 import {HSLA} from "@daybrush/utils";
 
@@ -44,7 +51,7 @@ console.log(HSLA); // "hsla"
 var HSLA = "hsla";
 /**
 * gets an array of color models.
-* @memberof consts
+* @memberof Color
 * @example
 import {COLOR_MODELS} from "@daybrush/utils";
 
@@ -54,7 +61,7 @@ console.log(COLOR_MODELS); // ["rgb", "rgba", "hsl", "hsla"];
 var COLOR_MODELS = [RGB, RGBA, HSL, HSLA];
 /**
 * get string "function"
-* @memberof consts
+* @memberof Consts
 * @example
 import {FUNCTION} from "@daybrush/utils";
 
@@ -64,7 +71,7 @@ console.log(FUNCTION); // "function"
 var FUNCTION = "function";
 /**
 * get string "property"
-* @memberof consts
+* @memberof Consts
 * @example
 import {PROPERTY} from "@daybrush/utils";
 
@@ -74,7 +81,7 @@ console.log(PROPERTY); // "property"
 var PROPERTY = "property";
 /**
 * get string "array"
-* @memberof consts
+* @memberof Consts
 * @example
 import {ARRAY} from "@daybrush/utils";
 
@@ -84,7 +91,7 @@ console.log(ARRAY); // "array"
 var ARRAY = "array";
 /**
 * get string "object"
-* @memberof consts
+* @memberof Consts
 * @example
 import {OBJECT} from "@daybrush/utils";
 
@@ -94,7 +101,7 @@ console.log(OBJECT); // "object"
 var OBJECT = "object";
 /**
 * get string "string"
-* @memberof consts
+* @memberof Consts
 * @example
 import {STRING} from "@daybrush/utils";
 
@@ -104,7 +111,7 @@ console.log(STRING); // "string"
 var STRING = "string";
 /**
 * get string "number"
-* @memberof consts
+* @memberof Consts
 * @example
 import {NUMBER} from "@daybrush/utils";
 
@@ -114,7 +121,7 @@ console.log(NUMBER); // "number"
 var NUMBER = "number";
 /**
 * get string "undefined"
-* @memberof consts
+* @memberof Consts
 * @example
 import {UNDEFINED} from "@daybrush/utils";
 
@@ -214,8 +221,13 @@ var KEYFRAMES =
 ANIMATION.replace("animation", "keyframes");
 
 /**
+* @namespace
+* @name Utils
+*/
+
+/**
 * Check the type that the value is undefined.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -232,7 +244,7 @@ function isUndefined(value) {
 }
 /**
 * Check the type that the value is object.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -249,7 +261,7 @@ function isObject(value) {
 }
 /**
 * Check the type that the value is isArray.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -266,7 +278,7 @@ function isArray(value) {
 }
 /**
 * Check the type that the value is string.
-* @memberof utils
+* @memberof Utils
 * @param {string} value - Value to check the type
 * @return {boolean} true if the type is correct, false otherwise
 * @example
@@ -283,7 +295,7 @@ function isString(value) {
 }
 /**
 * divide text by space.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {Array} divided texts
 * @example
@@ -302,7 +314,7 @@ function splitSpace(text) {
 }
 /**
 * divide text by comma.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {Array} divided texts
 * @example
@@ -324,7 +336,7 @@ function splitComma(text) {
 }
 /**
 * divide text by bracket "(", ")".
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {object} divided texts
 * @example
@@ -351,7 +363,7 @@ function splitBracket(text) {
 }
 /**
 * divide text by number and unit.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - text to divide
 * @return {object} divided texts
 * @example
@@ -387,7 +399,7 @@ function splitUnit(text) {
 }
 /**
 * transform strings to camel-case
-* @memberof utils
+* @memberof Utils
 * @param {String} text - string
 * @return {String} camel-case string
 * @example
@@ -405,7 +417,7 @@ function camelize(str) {
 }
 /**
 * transform a camelized string into a lowercased string.
-* @memberof utils
+* @memberof Utils
 * @param {string} text - a camel-cased string
 * @param {string} [separator="-"] - a separator
 * @return {string}  a lowercased string
@@ -734,9 +746,5 @@ function fromCSS(elements, properties) {
   return cssObject;
 }
 
-/**
- * @namespace utils
- */
-
-export { cutHex, hexToRGBA, toFullHex, hslToRGBA, stringToRGBA, RGB, RGBA, HSL, HSLA, COLOR_MODELS, FUNCTION, PROPERTY, ARRAY, OBJECT, STRING, NUMBER, UNDEFINED, getCrossBrowserProperty, TRANSFORM, FILTER, ANIMATION, KEYFRAMES, isUndefined, isObject, isArray, isString, splitSpace, splitComma, splitBracket, splitUnit, camelize, decamelize, now, requestAnimationFrame, hasClass, addClass, removeClass, fromCSS };
+export { RGB, RGBA, HSL, HSLA, COLOR_MODELS, FUNCTION, PROPERTY, ARRAY, OBJECT, STRING, NUMBER, UNDEFINED, getCrossBrowserProperty, TRANSFORM, FILTER, ANIMATION, KEYFRAMES, cutHex, hexToRGBA, toFullHex, hslToRGBA, stringToRGBA, isUndefined, isObject, isArray, isString, splitSpace, splitComma, splitBracket, splitUnit, camelize, decamelize, now, requestAnimationFrame, hasClass, addClass, removeClass, fromCSS };
 //# sourceMappingURL=utils.esm.js.map
