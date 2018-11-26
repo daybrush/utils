@@ -4,6 +4,14 @@ utils for Daybush
 
 [**API Documentation**](http://daybrush.com/utils/release/latest/doc/index.html)
 
+```
+$ npm i @daybrush/utils
+```
+
+```js
+import {TRANSFORM, requestAnimationFrame, splitComma} from "@daybrush/utils";
+```
+
 ### [Consts](http://daybrush.com/utils/release/latest/doc/Consts.html)
 * OBJECT
 * PROPERTY
