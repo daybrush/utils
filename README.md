@@ -1,9 +1,7 @@
 # @daybrush/utils  [![npm version](https://badge.fury.io/js/%40daybrush%2Futils.svg)](https://badge.fury.io/js/%40daybrush%2Futils)
 
-
-utils for daybrush
-
-### consts
+### [Consts](http://daybrush.com/utils/release/latest/doc)
+* OBJECT
 * RGB
 * RGBA
 * HSL
@@ -13,12 +11,15 @@ utils for daybrush
 * ANIMATION
 * KEYFRAMES
 
-### functions
+### [Cross Browser](http://daybrush.com/utils/release/latest/doc)
+
+### [Color](http://daybrush.com/utils/release/latest/doc)
+### [Utils](http://daybrush.com/utils/release/latest/doc)
 * splitUnit
 * splitComma
 * splitSpace
 * hexToRGBA
-* hex3to6
+* toFullHex
 * hslToRGBA
 * isUndefined
 * isObject
@@ -30,4 +31,5 @@ utils for daybrush
 * removeClass,
 * addClass,
 * fromCSS,
+*
 * requestAnimationFrame
