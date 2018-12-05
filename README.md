@@ -53,6 +53,7 @@ import {TRANSFORM, requestAnimationFrame, splitComma} from "@daybrush/utils";
 * splitSpace
 * splitBracket
 * isUndefined
+* isFunction
 * isObject
 * isArray
 * isString

@@ -1,4 +1,4 @@
-import { ObjectInterface, UNDEFINED, STRING, OBJECT } from "./consts";
+import { ObjectInterface, UNDEFINED, STRING, OBJECT, FUNCTION } from "./consts";
 /**
 * @namespace
 * @name Utils
@@ -67,6 +67,23 @@ console.log(isString(null)); // false
 */
 export function isString(value: any): value is string {
   return typeof value === STRING;
+}
+/**
+* Check the type that the value is function.
+* @memberof Utils
+* @param {string} value - Value to check the type
+* @return {boolean} true if the type is correct, false otherwise
+* @example
+import {isFunction} from "@daybrush/utils";
+
+console.log(isFunction(function a() {})); // true
+console.log(isFunction(() => {})); // true
+console.log(isFunction("1234")); // false
+console.log(isFunction(1)); // false
+console.log(isFunction(null)); // false
+*/
+export function isFunction(value: any): value is (...args: any[]) => any {
+  return typeof value === FUNCTION;
 }
 /**
 * divide text by space.

@@ -1,6 +1,6 @@
 {
   "name": "@daybrush/utils",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "utils for daybrush",
   "main": "dist/utils.js",
   "module": "dist/utils.esm.js",
@@ -26,7 +26,11 @@
     "animation",
     "crossbrowser",
     "rgb",
-    "hsl"
+    "hsl",
+    "isUndefined",
+    "isFunction",
+    "isString",
+    "isNumber"
   ],
   "scripts": {
     "build": "npm run build:rollup && npm run declaration",
