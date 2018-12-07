@@ -19,6 +19,7 @@ import {TRANSFORM, requestAnimationFrame, splitComma} from "@daybrush/utils";
 * UNDEFINED
 * FUNCTION
 * ARRAY
+* IS_WINDOW
 
 ### [Cross Browser](http://daybrush.com/utils/release/latest/doc/CrossBrowser.html)
 * TRANSFORM

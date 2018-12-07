@@ -1,4 +1,4 @@
-import { ObjectInterface, UNDEFINED, STRING, OBJECT, FUNCTION } from "./consts";
+import { ObjectInterface, UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW } from "./consts";
 /**
 * @namespace
 * @name Utils
@@ -231,7 +231,7 @@ requestAnimationFrame((timestamp) => {
 */
 export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
-  const raf = typeof window !== UNDEFINED &&
+  const raf = IS_WINDOW &&
     (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
       (window as any).mozRequestAnimationFrame);
 

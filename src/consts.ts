@@ -117,6 +117,17 @@ console.log(UNDEFINED); // "undefined"
 */
 export const UNDEFINED = "undefined";
 
+/**
+* Check whether the environment is window or node.js.
+* @memberof Consts
+* @example
+import {IS_WINDOW} from "@daybrush/utils";
+
+console.log(IS_WINDOW); // false in node.js
+console.log(IS_WINDOW); // true in browser
+*/
+export const IS_WINDOW = typeof window !== UNDEFINED;
+
 const prefixes: string[] = ["webkit", "ms", "moz", "o"];
 
 /**
