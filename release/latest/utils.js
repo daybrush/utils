@@ -1,15 +1,16 @@
 /*
 Copyright (c) 2018 Daybrush
+@name: @daybrush/utils
 license: MIT
 author: Daybrush
 repository: https://github.com/daybrush/utils
 @version 0.4.0
 */
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (factory((global.utils = {})));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global.utils = factory());
+}(this, (function () { 'use strict';
 
   /**
   * @namespace
@@ -781,46 +782,52 @@ repository: https://github.com/daybrush/utils
     return cssObject;
   }
 
-  exports.RGB = RGB;
-  exports.RGBA = RGBA;
-  exports.HSL = HSL;
-  exports.HSLA = HSLA;
-  exports.COLOR_MODELS = COLOR_MODELS;
-  exports.FUNCTION = FUNCTION;
-  exports.PROPERTY = PROPERTY;
-  exports.ARRAY = ARRAY;
-  exports.OBJECT = OBJECT;
-  exports.STRING = STRING;
-  exports.NUMBER = NUMBER;
-  exports.UNDEFINED = UNDEFINED;
-  exports.IS_WINDOW = IS_WINDOW;
-  exports.getCrossBrowserProperty = getCrossBrowserProperty;
-  exports.TRANSFORM = TRANSFORM;
-  exports.FILTER = FILTER;
-  exports.ANIMATION = ANIMATION;
-  exports.KEYFRAMES = KEYFRAMES;
-  exports.cutHex = cutHex;
-  exports.hexToRGBA = hexToRGBA;
-  exports.toFullHex = toFullHex;
-  exports.hslToRGBA = hslToRGBA;
-  exports.stringToRGBA = stringToRGBA;
-  exports.isUndefined = isUndefined;
-  exports.isObject = isObject;
-  exports.isArray = isArray;
-  exports.isString = isString;
-  exports.isFunction = isFunction;
-  exports.splitSpace = splitSpace;
-  exports.splitComma = splitComma;
-  exports.splitBracket = splitBracket;
-  exports.splitUnit = splitUnit;
-  exports.camelize = camelize;
-  exports.decamelize = decamelize;
-  exports.now = now;
-  exports.requestAnimationFrame = requestAnimationFrame;
-  exports.hasClass = hasClass;
-  exports.addClass = addClass;
-  exports.removeClass = removeClass;
-  exports.fromCSS = fromCSS;
+
+
+  var utils = ({
+    RGB: RGB,
+    RGBA: RGBA,
+    HSL: HSL,
+    HSLA: HSLA,
+    COLOR_MODELS: COLOR_MODELS,
+    FUNCTION: FUNCTION,
+    PROPERTY: PROPERTY,
+    ARRAY: ARRAY,
+    OBJECT: OBJECT,
+    STRING: STRING,
+    NUMBER: NUMBER,
+    UNDEFINED: UNDEFINED,
+    IS_WINDOW: IS_WINDOW,
+    getCrossBrowserProperty: getCrossBrowserProperty,
+    TRANSFORM: TRANSFORM,
+    FILTER: FILTER,
+    ANIMATION: ANIMATION,
+    KEYFRAMES: KEYFRAMES,
+    cutHex: cutHex,
+    hexToRGBA: hexToRGBA,
+    toFullHex: toFullHex,
+    hslToRGBA: hslToRGBA,
+    stringToRGBA: stringToRGBA,
+    isUndefined: isUndefined,
+    isObject: isObject,
+    isArray: isArray,
+    isString: isString,
+    isFunction: isFunction,
+    splitSpace: splitSpace,
+    splitComma: splitComma,
+    splitBracket: splitBracket,
+    splitUnit: splitUnit,
+    camelize: camelize,
+    decamelize: decamelize,
+    now: now,
+    requestAnimationFrame: requestAnimationFrame,
+    hasClass: hasClass,
+    addClass: addClass,
+    removeClass: removeClass,
+    fromCSS: fromCSS
+  });
+
+  return utils;
 
 })));
 //# sourceMappingURL=utils.js.map
