@@ -3,6 +3,9 @@
 * @name Consts
 */
 
+/**
+ * @typedef
+ */
 export interface ObjectInterface<T> {
   [name: string]: T;
 }
