@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>css.ts - Documentation</title>
+    <title>Global - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/custom.css">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta name="description" content="css.ts - Documentation"/>
+    <meta name="description" content="Global - Documentation"/>
 
 </head>
 <body>
@@ -31,114 +31,219 @@
 
 <div id="main">
     
-    <h1 class="page-title">css.ts</h1>
+    <h1 class="page-title">Global</h1>
     
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import { ObjectInterface } from "./consts";
+        <h2>
+        
+        </h2>
+        
+    
+</header>
 
-/**
- * @namespace DOM
- */
+<article>
+    <div class="container-overview">
+    
+        
 
-/**
-* Checks if the specified class value exists in the element's class attribute.
-* @memberof DOM
-* @param {HTMLElement} element - target
-* @param {string} className - the class name to search
-* @return {boolean} return false if the class is not found.
-* @example
-import {hasClass} from "@daybrush/utils";
+<dl class="details">
 
-console.log(hasClass(element, "start")); // true or false
-*/
-export function hasClass(element: HTMLElement, className: string) {
-  if (element.classList) {
-    return element.classList.contains(className);
-  }
-  return !!element.className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
-}
+    
 
-/**
-* Add the specified class value. If these classe already exist in the element's class attribute they are ignored.
-* @memberof DOM
-* @param {HTMLElement} element - target
-* @param {string} className - the class name to add
-* @example
-import {addClass} from "@daybrush/utils";
+    
 
-addClass(element, "start");
-*/
-export function addClass(element: HTMLElement, className: string) {
-  if (element.classList) {
-    element.classList.add(className);
-  } else {
-    element.className += ` ${className}`;
-  }
-}
+    
 
-/**
-* Removes the specified class value.
-* @memberof DOM
-* @param {HTMLElement} element - target
-* @param {string} className - the class name to remove
-* @example
-import {removeClass} from "@daybrush/utils";
+    
 
-removeClass(element, "start");
-*/
-export function removeClass(element: HTMLElement, className: string) {
-  if (element.classList) {
-    element.classList.remove(className);
-  } else {
-    const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
+    
 
-    element.className = element.className.replace(reg, " ");
-  }
-}
+    
 
-/**
-* Gets the CSS properties from the element.
-* @memberof DOM
-* @param {HTMLElement | HTMLElement[]} elements - elements
-* @param {string[]} properites - the CSS properties
-* @return {object} returns CSS properties and values.
-* @example
-import {fromCSS} from "@daybrush/utils";
+    
 
-console.log(fromCSS(element, ["left", "opacity", "top"])); // {"left": "10px", "opacity": 1, "top": "10px"}
-*/
-export function fromCSS(elements: HTMLElement | HTMLElement[] | NodeListOf&lt;HTMLElement>, properties: string[]) {
-  if (!elements || !properties || !properties.length) {
-    return {};
-  }
-  let element;
+    
 
-  if (elements instanceof Element) {
-    element = elements;
-  } else if (elements.length) {
-    element = elements[0];
-  } else {
-    return {};
-  }
-  const cssObject: ObjectInterface&lt;any> = {};
-  const styles = window.getComputedStyle(element) as any;
-  const length = properties.length;
+    
 
-  for (let i = 0; i &lt; length; ++i) {
-    cssObject[properties[i]] = styles[properties[i]];
-  }
-  return cssObject;
-}
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+        
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+     
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="ObjectInterface">ObjectInterface</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="consts.ts.html">consts.ts</a>, <a href="consts.ts.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+    <h5 class="subsection-title">Properties:</h5>
+
+    
+
+<table class="props">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>[name: string]</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">T</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+    <h5>Type:</h5>
+    <ul>
+        <li>
+            
+<span class="param-type">TSInterface</span>
+
+
+        </li>
+    </ul>
+
+
+
+
+
+
+            
+    
+
+    
+</article>
+
+</section>
 
 
 
@@ -147,10 +252,10 @@ export function fromCSS(elements: HTMLElement | HTMLElement[] | NodeListOf&lt;HT
 <style>
 
 
-nav li[file="css"]:after {
+nav li[file="global"]:after {
     display: none;
 }
-nav li[file="css"] h4, nav li[file="css"] ul {
+nav li[file="global"] h4, nav li[file="global"] ul {
     display: block;
 }
 </style>
