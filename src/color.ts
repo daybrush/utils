@@ -9,8 +9,8 @@ import { splitBracket, splitComma } from "./utils";
 /**
 * Remove the # from the hex color.
 * @memberof Color
-* @param {string} hex - hex color
-* @return {string} hex color
+* @param {} hex - hex color
+* @return {} hex color
 * @example
 import {cutHex} from "@daybrush/utils";
 
@@ -22,8 +22,8 @@ export function cutHex(hex: string) {
 /**
 * convert hex color to rgb color.
 * @memberof Color
-* @param {String} hex - hex color
-* @return {Array} rgb color
+* @param {} hex - hex color
+* @return {} rgb color
 * @example
 import {hexToRGBA} from "@daybrush/utils";
 
@@ -32,7 +32,7 @@ console.log(hexToRGBA("#00000005"));
 console.log(hexToRGBA("#201045"));
 // [32, 16, 69, 1]
 */
-export function hexToRGBA(hex: string) {
+export function hexToRGBA(hex: string): number[] {
   const h = cutHex(hex);
   const r = parseInt(h.substring(0, 2), 16);
   const g = parseInt(h.substring(2, 4), 16);
@@ -48,15 +48,15 @@ export function hexToRGBA(hex: string) {
 /**
 * convert 3(or 4)-digit hex color to 6(or 8)-digit hex color.
 * @memberof Color
-* @param {String} hex - 3(or 4)-digit hex color
-* @return {String} 6(or 8)-digit hex color
+* @param {} hex - 3(or 4)-digit hex color
+* @return {} 6(or 8)-digit hex color
 * @example
 import {toFullHex} from "@daybrush/utils";
 
 console.log(toFullHex("#123")); // "#112233"
 console.log(toFullHex("#123a")); // "#112233aa"
 */
-export function toFullHex(h: string) {
+export function toFullHex(h: string): string {
   const r = h.charAt(1);
   const g = h.charAt(2);
   const b = h.charAt(3);
@@ -68,15 +68,15 @@ export function toFullHex(h: string) {
 /**
 * convert hsl color to rgba color.
 * @memberof Color
-* @param {Array} hsl(a) - hsl color(hue: 0 ~ 360, saturation: 0 ~ 1, lightness: 0 ~ 1, alpha: 0 ~ 1)
-* @return {Array} rgba color
+* @param {} hsl - hsl color(hue: 0 ~ 360, saturation: 0 ~ 1, lightness: 0 ~ 1, alpha: 0 ~ 1)
+* @return {} rgba color
 * @example
 import {hslToRGBA} from "@daybrush/utils";
 
 console.log(hslToRGBA([150, 0.5, 0.4]));
 // [51, 153, 102, 1]
 */
-export function hslToRGBA(hsl: number[]) {
+export function hslToRGBA(hsl: number[]): number[] {
   let h = hsl[0];
   const s = hsl[1];
   const l = hsl[2];
@@ -116,8 +116,8 @@ export function hslToRGBA(hsl: number[]) {
 /**
 * convert string to rgba color.
 * @memberof Color
-* @param {String} - 3-hex(#000), 4-hex(#0000) 6-hex(#000000), 8-hex(#00000000) or RGB(A), or HSL(A)
-* @return {Array} rgba color
+* @param {} - 3-hex(#000), 4-hex(#0000) 6-hex(#000000), 8-hex(#00000000) or RGB(A), or HSL(A)
+* @return {} rgba color
 * @example
 import {stringToRGBA} from "@daybrush/utils";
 
@@ -125,7 +125,7 @@ console.log(stringToRGBA("#000000")); // [0, 0, 0, 1]
 console.log(stringToRGBA("rgb(100, 100, 100)")); // [100, 100, 100, 1]
 console.log(stringToRGBA("hsl(150, 0.5, 0.4)")); // [51, 153, 102, 1]
 */
-export function stringToRGBA(color: string) {
+export function stringToRGBA(color: string): number[] {
   if (color.charAt(0) === "#") {
     if (color.length === 4 || color.length === 5) {
       return hexToRGBA(toFullHex(color));

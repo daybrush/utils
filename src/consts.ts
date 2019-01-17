@@ -6,7 +6,7 @@
 /**
  * @typedef
  */
-export interface ObjectInterface<T> {
+export interface IObject<T> {
   [name: string]: T;
 }
 

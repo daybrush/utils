@@ -1,4 +1,4 @@
-import { ObjectInterface } from "./consts";
+import { IObject } from "./consts";
 
 /**
  * @namespace DOM
@@ -7,8 +7,8 @@ import { ObjectInterface } from "./consts";
 /**
 * Checks if the specified class value exists in the element's class attribute.
 * @memberof DOM
-* @param {HTMLElement} element - target
-* @param {string} className - the class name to search
+* @param element - target
+* @param className - the class name to search
 * @return {boolean} return false if the class is not found.
 * @example
 import {hasClass} from "@daybrush/utils";
@@ -25,8 +25,8 @@ export function hasClass(element: HTMLElement, className: string) {
 /**
 * Add the specified class value. If these classe already exist in the element's class attribute they are ignored.
 * @memberof DOM
-* @param {HTMLElement} element - target
-* @param {string} className - the class name to add
+* @param element - target
+* @param className - the class name to add
 * @example
 import {addClass} from "@daybrush/utils";
 
@@ -43,8 +43,8 @@ export function addClass(element: HTMLElement, className: string) {
 /**
 * Removes the specified class value.
 * @memberof DOM
-* @param {HTMLElement} element - target
-* @param {string} className - the class name to remove
+* @param element - target
+* @param className - the class name to remove
 * @example
 import {removeClass} from "@daybrush/utils";
 
@@ -63,15 +63,16 @@ export function removeClass(element: HTMLElement, className: string) {
 /**
 * Gets the CSS properties from the element.
 * @memberof DOM
-* @param {HTMLElement | HTMLElement[]} elements - elements
-* @param {string[]} properites - the CSS properties
-* @return {object} returns CSS properties and values.
+* @param elements - elements
+* @param properites - the CSS properties
+* @return returns CSS properties and values.
 * @example
 import {fromCSS} from "@daybrush/utils";
 
 console.log(fromCSS(element, ["left", "opacity", "top"])); // {"left": "10px", "opacity": 1, "top": "10px"}
 */
-export function fromCSS(elements: HTMLElement | HTMLElement[] | NodeListOf<HTMLElement>, properties: string[]) {
+export function fromCSS(
+  elements: HTMLElement | HTMLElement[] | NodeListOf<HTMLElement>, properties: string[]): IObject<any> {
   if (!elements || !properties || !properties.length) {
     return {};
   }
@@ -84,7 +85,7 @@ export function fromCSS(elements: HTMLElement | HTMLElement[] | NodeListOf<HTMLE
   } else {
     return {};
   }
-  const cssObject: ObjectInterface<any> = {};
+  const cssObject: IObject<any> = {};
   const styles = window.getComputedStyle(element) as any;
   const length = properties.length;
 

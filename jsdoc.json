@@ -18,5 +18,15 @@
     "templates": {
         "cleverLinks": false,
         "monospaceLinks": false
+    },
+    "docdash": {
+        "menu": {
+            "Github repo": {
+                "href": "https://github.com/daybrush/utils",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "repository"
+            }
+        }
     }
 }

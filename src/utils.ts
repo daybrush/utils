@@ -1,4 +1,4 @@
-import { ObjectInterface, UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW } from "./consts";
+import { IObject, UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW } from "./consts";
 /**
 * @namespace
 * @name Utils
@@ -24,7 +24,7 @@ export function isUndefined(value: any): value is undefined {
 * Check the type that the value is object.
 * @memberof Utils
 * @param {string} value - Value to check the type
-* @return {boolean} true if the type is correct, false otherwise
+* @return {} true if the type is correct, false otherwise
 * @example
 import {isObject} from "@daybrush/utils";
 
@@ -33,14 +33,14 @@ console.log(isObject(undefined)); // false
 console.log(isObject("")); // false
 console.log(isObject(null)); // false
 */
-export function isObject(value: any): value is ObjectInterface<any> {
+export function isObject(value: any): value is IObject<any> {
   return value && (typeof value === OBJECT);
 }
 /**
 * Check the type that the value is isArray.
 * @memberof Utils
 * @param {string} value - Value to check the type
-* @return {boolean} true if the type is correct, false otherwise
+* @return {} true if the type is correct, false otherwise
 * @example
 import {isArray} from "@daybrush/utils";
 
@@ -56,7 +56,7 @@ export function isArray(value: any): value is any[] {
 * Check the type that the value is string.
 * @memberof Utils
 * @param {string} value - Value to check the type
-* @return {boolean} true if the type is correct, false otherwise
+* @return {} true if the type is correct, false otherwise
 * @example
 import {isString} from "@daybrush/utils";
 
@@ -72,7 +72,7 @@ export function isString(value: any): value is string {
 * Check the type that the value is function.
 * @memberof Utils
 * @param {string} value - Value to check the type
-* @return {boolean} true if the type is correct, false otherwise
+* @return {} true if the type is correct, false otherwise
 * @example
 import {isFunction} from "@daybrush/utils";
 
@@ -150,7 +150,7 @@ export function splitBracket(text: string) {
 * divide text by number and unit.
 * @memberof Utils
 * @param {string} text - text to divide
-* @return {object} divided texts
+* @return {} divided texts
 * @example
 import {splitUnit} from "@daybrush/utils";
 
@@ -161,7 +161,7 @@ console.log(splitUnit("-10px"));
 console.log(splitUnit("a10%"));
 // {prefix: "a", value: 10, unit: "%"}
 */
-export function splitUnit(text: string) {
+export function splitUnit(text: string): {prefix: string, unit: string, value: number} {
   const matches = /^([^\d|e|\-|\+]*)((?:\d|\.|-|e-|e\+)+)(\S*)$/g.exec(text);
 
   if (!matches) {
