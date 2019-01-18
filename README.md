@@ -2,7 +2,7 @@
 
 utils for Daybush
 
-[**API Documentation**](http://daybrush.com/utils/release/latest/doc/index.html)
+[**API Documentation**](https://daybrush.com/utils/release/latest/doc/index.html)
 
 ```
 $ npm i @daybrush/utils
