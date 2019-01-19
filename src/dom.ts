@@ -4,8 +4,19 @@ import { IObject, document } from "./consts";
  * @namespace DOM
  */
 
-export function $(selector: string, multi: true): NodeListOf<Element>;
-export function $(selector: string, multi?: false): Element;
+export function $<K extends keyof HTMLElementTagNameMap>(selectors: K, multi: true):
+  NodeListOf<HTMLElementTagNameMap[K]>;
+export function $<K extends keyof SVGElementTagNameMap>(selectors: K, multi: true): NodeListOf<SVGElementTagNameMap[K]>;
+export function $<E extends Element = Element>(selectors: string, multi: true): NodeListOf<E>;
+
+export function $<K extends keyof HTMLElementTagNameMap>(selectors: K, multi?: false): HTMLElementTagNameMap[K] | null;
+export function $<K extends keyof SVGElementTagNameMap>(selectors: K, multi?: false): SVGElementTagNameMap[K] | null;
+export function $<E extends Element = Element>(selectors: string, multi?: false): E | null;
+/**
+ * Returns all element descendants of node that
+ * match selectors.
+ */
+
 /**
  * Checks if the specified class value exists in the element's class attribute.
  * @memberof DOM
@@ -17,8 +28,8 @@ import {$} from "@daybrush/utils";
 console.log($("div")); // div element
 console.log($("div", true)); // [div, div] elements
 */
-export function $(selector: string, multi?: boolean): Element | NodeListOf<Element> {
-  return multi ? document.querySelectorAll(selector) : document.querySelector(selector);
+export function $<E extends Element = Element>(selectors: string, multi?: boolean): E | NodeListOf<E> {
+  return multi ? document.querySelectorAll<E>(selectors) : document.querySelector<E>(selectors);
 }
 
 /**
