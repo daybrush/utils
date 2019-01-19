@@ -131,6 +131,20 @@ console.log(IS_WINDOW); // true in browser
 */
 export const IS_WINDOW = typeof window !== UNDEFINED;
 
+/**
+* Check whether the environment is window or node.js.
+* @memberof Consts
+* @name document
+* @example
+import {IS_WINDOW} from "@daybrush/utils";
+
+console.log(IS_WINDOW); // false in node.js
+console.log(IS_WINDOW); // true in browser
+*/
+const doc = typeof document !== UNDEFINED && document;
+
+export {doc as document};
+
 const prefixes: string[] = ["webkit", "ms", "moz", "o"];
 
 /**
@@ -150,10 +164,10 @@ console.log(getCrossBrowserProperty("transform")); // "transform", "-ms-transfor
 console.log(getCrossBrowserProperty("filter")); // "filter", "-webkit-filter"
 */
 export const getCrossBrowserProperty =  /*#__PURE__*/(property: string) => {
-  if (typeof document === UNDEFINED) {
+  if (!doc) {
     return "";
   }
-  const styles = (document.body || document.documentElement).style as any;
+  const styles = (doc.body || doc.documentElement).style as any;
   const length = prefixes.length;
 
   if (typeof styles[property] !== UNDEFINED) {

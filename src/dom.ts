@@ -1,8 +1,25 @@
-import { IObject } from "./consts";
+import { IObject, document } from "./consts";
 
 /**
  * @namespace DOM
  */
+
+export function $(selector: string, multi: true): NodeListOf<Element>;
+export function $(selector: string, multi?: false): Element;
+/**
+ * Checks if the specified class value exists in the element's class attribute.
+ * @memberof DOM
+ * @param - A DOMString containing one or more selectors to match
+ * @param - If multi is true, a DOMString containing one or more selectors to match against.
+ * @example
+import {$} from "@daybrush/utils";
+
+console.log($("div")); // div element
+console.log($("div", true)); // [div, div] elements
+*/
+export function $(selector: string, multi?: boolean): Element | NodeListOf<Element> {
+  return multi ? document.querySelectorAll(selector) : document.querySelector(selector);
+}
 
 /**
 * Checks if the specified class value exists in the element's class attribute.

@@ -13,6 +13,7 @@ import {TRANSFORM, requestAnimationFrame, splitComma} from "@daybrush/utils";
 ```
 
 ### [Consts](http://daybrush.com/utils/release/latest/doc/Consts.html)
+* document
 * OBJECT
 * PROPERTY
 * STRING
@@ -43,6 +44,7 @@ import {TRANSFORM, requestAnimationFrame, splitComma} from "@daybrush/utils";
 * toFullHex
 
 ### [DOM](http://daybrush.com/utils/release/latest/doc/DOM.html)
+* $
 * hasClass
 * removeClass
 * addClass
