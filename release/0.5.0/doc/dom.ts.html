@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>dom.ts - Documentation</title>
 
     <script src="scripts/prettify/prettify.js"></script>
     <script src="scripts/prettify/lang-css.js"></script>
@@ -13,7 +13,7 @@
     <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
     <link type="text/css" rel="stylesheet" href="styles/custom.css">
     <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
-    <meta name="description" content="Home - Documentation"/>
+    <meta name="description" content="dom.ts - Documentation"/>
 
 </head>
 <body>
@@ -31,91 +31,132 @@
 
 <div id="main">
     
+    <h1 class="page-title">dom.ts</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { IObject, document } from "./consts";
 
+/**
+ * @namespace DOM
+ */
 
+export function $(selector: string, multi: true): NodeListOf&lt;Element>;
+export function $(selector: string, multi?: false): Element;
+/**
+ * Checks if the specified class value exists in the element's class attribute.
+ * @memberof DOM
+ * @param - A DOMString containing one or more selectors to match
+ * @param - If multi is true, a DOMString containing one or more selectors to match against.
+ * @example
+import {$} from "@daybrush/utils";
 
+console.log($("div")); // div element
+console.log($("div", true)); // [div, div] elements
+*/
+export function $(selector: string, multi?: boolean): Element | NodeListOf&lt;Element> {
+  return multi ? document.querySelectorAll(selector) : document.querySelector(selector);
+}
 
+/**
+* Checks if the specified class value exists in the element's class attribute.
+* @memberof DOM
+* @param element - target
+* @param className - the class name to search
+* @return {boolean} return false if the class is not found.
+* @example
+import {hasClass} from "@daybrush/utils";
 
+console.log(hasClass(element, "start")); // true or false
+*/
+export function hasClass(element: HTMLElement, className: string) {
+  if (element.classList) {
+    return element.classList.contains(className);
+  }
+  return !!element.className.match(new RegExp(`(\\s|^)${className}(\\s|$)`));
+}
 
+/**
+* Add the specified class value. If these classe already exist in the element's class attribute they are ignored.
+* @memberof DOM
+* @param element - target
+* @param className - the class name to add
+* @example
+import {addClass} from "@daybrush/utils";
 
+addClass(element, "start");
+*/
+export function addClass(element: HTMLElement, className: string) {
+  if (element.classList) {
+    element.classList.add(className);
+  } else {
+    element.className += ` ${className}`;
+  }
+}
 
+/**
+* Removes the specified class value.
+* @memberof DOM
+* @param element - target
+* @param className - the class name to remove
+* @example
+import {removeClass} from "@daybrush/utils";
 
-    
+removeClass(element, "start");
+*/
+export function removeClass(element: HTMLElement, className: string) {
+  if (element.classList) {
+    element.classList.remove(className);
+  } else {
+    const reg = new RegExp(`(\\s|^)${className}(\\s|$)`);
 
+    element.className = element.className.replace(reg, " ");
+  }
+}
 
-    <section class="readme">
-        <article><h1>@daybrush/utils  <a href="https://badge.fury.io/js/%40daybrush%2Futils"><img src="https://badge.fury.io/js/%40daybrush%2Futils.svg" alt="npm version"></a></h1>
-<p>utils for Daybush</p>
-<p><a href="https://daybrush.com/utils/release/latest/doc/index.html"><strong>API Documentation</strong></a></p>
-<pre class="prettyprint source"><code>$ npm i @daybrush/utils
+/**
+* Gets the CSS properties from the element.
+* @memberof DOM
+* @param elements - elements
+* @param properites - the CSS properties
+* @return returns CSS properties and values.
+* @example
+import {fromCSS} from "@daybrush/utils";
+
+console.log(fromCSS(element, ["left", "opacity", "top"])); // {"left": "10px", "opacity": 1, "top": "10px"}
+*/
+export function fromCSS(
+  elements: HTMLElement | HTMLElement[] | NodeListOf&lt;HTMLElement>, properties: string[]): IObject&lt;any> {
+  if (!elements || !properties || !properties.length) {
+    return {};
+  }
+  let element;
+
+  if (elements instanceof Element) {
+    element = elements;
+  } else if (elements.length) {
+    element = elements[0];
+  } else {
+    return {};
+  }
+  const cssObject: IObject&lt;any> = {};
+  const styles = window.getComputedStyle(element) as any;
+  const length = properties.length;
+
+  for (let i = 0; i &lt; length; ++i) {
+    cssObject[properties[i]] = styles[properties[i]];
+  }
+  return cssObject;
+}
 </code></pre>
-<pre class="prettyprint source lang-js"><code>import {TRANSFORM, requestAnimationFrame, splitComma} from &quot;@daybrush/utils&quot;;
-</code></pre>
-<h3><a href="http://daybrush.com/utils/release/latest/doc/Consts.html">Consts</a></h3>
-<ul>
-<li>document</li>
-<li>OBJECT</li>
-<li>PROPERTY</li>
-<li>STRING</li>
-<li>UNDEFINED</li>
-<li>FUNCTION</li>
-<li>ARRAY</li>
-<li>IS_WINDOW</li>
-</ul>
-<h3><a href="http://daybrush.com/utils/release/latest/doc/CrossBrowser.html">Cross Browser</a></h3>
-<ul>
-<li>TRANSFORM</li>
-<li>FILTER</li>
-<li>ANIMATION</li>
-<li>KEYFRAMES</li>
-<li>getCrossBrowserProperty</li>
-<li>now</li>
-<li>requestAnimationFrame</li>
-</ul>
-<h3><a href="http://daybrush.com/utils/release/latest/doc/Color.html">Color</a></h3>
-<ul>
-<li>RGB</li>
-<li>RGBA</li>
-<li>HSL</li>
-<li>HSLA</li>
-<li>COLOR_MODELS</li>
-<li>cutHex</li>
-<li>hexToRGBA</li>
-<li>hslToRGBA</li>
-<li>stringToRGBA</li>
-<li>toFullHex</li>
-</ul>
-<h3><a href="http://daybrush.com/utils/release/latest/doc/DOM.html">DOM</a></h3>
-<ul>
-<li>$</li>
-<li>hasClass</li>
-<li>removeClass</li>
-<li>addClass</li>
-<li>fromCSS</li>
-</ul>
-<h3><a href="http://daybrush.com/utils/release/latest/doc/Utils.html">Utils</a></h3>
-<ul>
-<li>splitUnit</li>
-<li>splitComma</li>
-<li>splitSpace</li>
-<li>splitBracket</li>
-<li>isUndefined</li>
-<li>isFunction</li>
-<li>isObject</li>
-<li>isArray</li>
-<li>isString</li>
-<li>camelize</li>
-<li>decamelize</li>
-</ul></article>
+        </article>
     </section>
-
-
 
 
 
@@ -123,18 +164,11 @@
 
 <style>
 
-nav>.search+ul li:first-child:after {
+
+nav li[file="dom"]:after {
     display: none;
 }
-nav>.search+ul li:first-child h4, nav>.search+ul li:first-child ul {
-    display: block;
-}
-
-
-nav li[file="home"]:after {
-    display: none;
-}
-nav li[file="home"] h4, nav li[file="home"] ul {
+nav li[file="dom"] h4, nav li[file="dom"] ul {
     display: block;
 }
 </style>
