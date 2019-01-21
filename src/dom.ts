@@ -43,7 +43,7 @@ import {hasClass} from "@daybrush/utils";
 
 console.log(hasClass(element, "start")); // true or false
 */
-export function hasClass(element: HTMLElement, className: string) {
+export function hasClass(element: Element, className: string) {
   if (element.classList) {
     return element.classList.contains(className);
   }
@@ -60,7 +60,7 @@ import {addClass} from "@daybrush/utils";
 
 addClass(element, "start");
 */
-export function addClass(element: HTMLElement, className: string) {
+export function addClass(element: Element, className: string) {
   if (element.classList) {
     element.classList.add(className);
   } else {
@@ -78,7 +78,7 @@ import {removeClass} from "@daybrush/utils";
 
 removeClass(element, "start");
 */
-export function removeClass(element: HTMLElement, className: string) {
+export function removeClass(element: Element, className: string) {
   if (element.classList) {
     element.classList.remove(className);
   } else {
@@ -100,7 +100,7 @@ import {fromCSS} from "@daybrush/utils";
 console.log(fromCSS(element, ["left", "opacity", "top"])); // {"left": "10px", "opacity": 1, "top": "10px"}
 */
 export function fromCSS(
-  elements: HTMLElement | HTMLElement[] | NodeListOf<HTMLElement>, properties: string[]): IObject<any> {
+  elements: Element | Element[] | NodeListOf<Element>, properties: string[]): IObject<any> {
   if (!elements || !properties || !properties.length) {
     return {};
   }
