@@ -4,13 +4,6 @@
 */
 
 /**
- * @typedef
- */
-export interface IObject<T> {
-  [name: string]: T;
-}
-
-/**
 * get string "rgb"
 * @memberof Color
 * @example

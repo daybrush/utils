@@ -1,4 +1,5 @@
-import { IObject, UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW } from "./consts";
+import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW } from "./consts";
+import { IArrayFormat, IObject } from "./types";
 /**
 * @namespace
 * @name Utils
@@ -204,6 +205,22 @@ console.log(decamelize("abcdEfg", "_")); // abcd_efg
 export function decamelize(str: string, separator: string = "-") {
   return str.replace(/([a-z])([A-Z])/g, (all, letter, letter2) => `${letter}${separator}${letter2.toLowerCase()}`);
 }
+
+/**
+* transforms something in an array into an array.
+* @memberof Utils
+* @param - Array form
+* @return an array
+* @example
+import {toArray} from "@daybrush/utils";
+
+const arr1 = toArray(document.querySelectorAll(".a")); // Element[]
+const arr2 = toArray(document.querySelectorAll<HTMLElement>(".a")); // HTMLElement[]
+*/
+export function toArray<T>(value: IArrayFormat<T>): T[] {
+  return [].slice.call(value);
+}
+
 /**
 * Date.now() method
 * @memberof CrossBrowser

@@ -1,4 +1,5 @@
-import { IObject, document } from "./consts";
+import { document } from "./consts";
+import { IObject } from "./types";
 
 /**
  * @namespace DOM
