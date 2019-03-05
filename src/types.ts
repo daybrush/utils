@@ -12,3 +12,10 @@ export interface IArrayFormat<T> {
 export interface IObject<T> {
   [name: string]: T;
 }
+/**
+ * @typedef
+ */
+export interface IEventMap extends ElementEventMap,
+  HTMLElementEventMap, SVGElementEventMap, HTMLMediaElementEventMap, HTMLBodyElementEventMap, HTMLVideoElementEventMap {
+  [name: string]: Event;
+}

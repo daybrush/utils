@@ -1,6 +1,6 @@
 {
   "name": "@daybrush/utils",
-  "version": "0.6.0",
+  "version": "0.7.0-rc",
   "description": "utils for daybrush",
   "main": "dist/utils.js",
   "module": "dist/utils.esm.js",
@@ -56,7 +56,7 @@
   },
   "homepage": "https://github.com/daybrush/utils#readme",
   "devDependencies": {
-    "@daybrush/jsdoc": "^0.3.1",
+    "@daybrush/jsdoc": "^0.3.6",
     "daybrush-jsdoc-template": "^1.5.0",
     "gh-pages": "^2.0.1",
     "rollup": "^0.66.6",
