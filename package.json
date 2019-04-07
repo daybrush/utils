@@ -38,12 +38,7 @@
     "declaration": "rm -rf declaration && tsc -p tsconfig.declaration.json",
     "build:rollup": "rollup -c",
     "doc": "rm -rf ./doc && jsdoc -c jsdoc.json",
-    "deploy": "gh-pages -d ./demo --dest=./ --add",
-    "release": "npm run build && npm run release:current && npm run release:latest && npm run release:doc  && npm run deploy",
-    "release:mkdir": "mkdir -p ./demo/release",
-    "release:current": "npm run release:mkdir && rm -rf ./demo/release/$npm_package_version && cp -a ./dist/. ./demo/release/$npm_package_version",
-    "release:latest": "npm run release:mkdir && rm -rf ./demo/release/latest && cp -a ./dist/. ./demo/release/latest",
-    "release:doc": "npm run doc && cp -a ./doc/. ./demo/release/latest/doc && cp -a ./doc/. ./demo/release/$npm_package_version/doc"
+    "release": "npm run build && npm run doc && release --dirs=dist,doc"
   },
   "repository": {
     "type": "git",
@@ -57,6 +52,7 @@
   "homepage": "https://github.com/daybrush/utils#readme",
   "devDependencies": {
     "@daybrush/jsdoc": "^0.3.6",
+    "@daybrush/release": "^0.1.1",
     "daybrush-jsdoc-template": "^1.5.0",
     "gh-pages": "^2.0.1",
     "rollup": "^0.66.6",
