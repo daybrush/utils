@@ -257,6 +257,11 @@ ANIMATION.replace("animation", "keyframes");
  * @param - The first number to base on the inner product
  * @param - The second number to base on the inner product
  * @return - Returns the inner product
+import { dot } from "@daybrush/utils";
+
+console.log(dot(0, 15, 2, 3)); // 6
+console.log(dot(5, 15, 2, 3)); // 9
+console.log(dot(5, 15, 1, 1)); // 10
  */
 
 function dot(a1, a2, b1, b2) {
