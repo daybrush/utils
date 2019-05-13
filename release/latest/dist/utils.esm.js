@@ -251,10 +251,12 @@ ANIMATION.replace("animation", "keyframes");
 
 /**
  * Returns the inner product of two numbers(`a1`, `a2`) by two criteria(`b1`, `b2`).
- * @param a1
- * @param a2
- * @param b1
- * @param b2
+ * @memberof Utils
+ * @param - The first number
+ * @param - The second number
+ * @param - The first number to base on the inner product
+ * @param - The second number to base on the inner product
+ * @return - Returns the inner product
  */
 
 function dot(a1, a2, b1, b2) {
