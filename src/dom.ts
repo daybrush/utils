@@ -125,7 +125,7 @@ export function fromCSS(
 }
 
 export function addEvent<K extends keyof IEventMap>(
-  el: Node, type: K, listener: (e: IEventMap[K]) => void, options?: boolean | AddEventListenerOptions): void;
+  el: EventTarget, type: K, listener: (e: IEventMap[K]) => void, options?: boolean | AddEventListenerOptions): void;
 /**
 * Sets up a function that will be called whenever the specified event is delivered to the target
 * @memberof DOM
@@ -141,7 +141,7 @@ addEvent(el, "click", e => {
 });
 */
 export function addEvent(
-  el: Node,
+  el: EventTarget,
   type: string, listener: (e: Event) => void,
   options?: boolean | AddEventListenerOptions) {
   el.addEventListener(type, listener, options);

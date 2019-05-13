@@ -1,6 +1,6 @@
 {
   "name": "@daybrush/utils",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "description": "utils for daybrush",
   "main": "dist/utils.js",
   "module": "dist/utils.esm.js",
@@ -31,7 +31,8 @@
     "isUndefined",
     "isFunction",
     "isString",
-    "isNumber"
+    "isNumber",
+    "dot"
   ],
   "scripts": {
     "build": "npm run build:rollup && npm run declaration",

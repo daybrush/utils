@@ -63,4 +63,4 @@ import {TRANSFORM, requestAnimationFrame, splitComma} from "@daybrush/utils";
 * camelize
 * decamelize
 * toArray
-
+* dot

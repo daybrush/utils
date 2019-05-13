@@ -6,6 +6,23 @@ import { IArrayFormat, IObject } from "./types";
 */
 
 /**
+ * Returns the inner product of two numbers(`a1`, `a2`) by two criteria(`b1`, `b2`).
+ * @memberof Utils
+ * @param - The first number
+ * @param - The second number
+ * @param - The first number to base on the inner product
+ * @param - The second number to base on the inner product
+ * @return - Returns the inner product
+import { dot } from "@daybrush/utils";
+
+console.log(dot(0, 15, 2, 3)); // 6
+console.log(dot(5, 15, 2, 3)); // 9
+console.log(dot(5, 15, 1, 1)); // 10
+ */
+export function dot(a1: number, a2: number, b1: number, b2: number) {
+  return (a1 * b2 + a2 * b1) / (b1 + b2);
+}
+/**
 * Check the type that the value is undefined.
 * @memberof Utils
 * @param {string} value - Value to check the type
