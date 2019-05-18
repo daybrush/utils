@@ -1,6 +1,6 @@
 {
   "name": "@daybrush/utils",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "utils for daybrush",
   "main": "dist/utils.js",
   "module": "dist/utils.esm.js",
@@ -22,6 +22,7 @@
     "decamelize",
     "now",
     "requestAnimationFrame",
+    "cancelAnimationFrame",
     "transform",
     "filter",
     "animation",

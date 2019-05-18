@@ -265,9 +265,9 @@ requestAnimationFrame((timestamp) => {
 */
 export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
-  const raf = IS_WINDOW &&
-    (window.requestAnimationFrame || window.webkitRequestAnimationFrame ||
-      (window as any).mozRequestAnimationFrame);
+  const raf = IS_WINDOW
+    && (window.requestAnimationFrame || window.webkitRequestAnimationFrame
+      || (window as any).mozRequestAnimationFrame || (window as any).msRequestAnimationFrame);
 
   return raf ? (raf.bind(window) as (callback: FrameRequestCallback) => number) : ((callback: FrameRequestCallback) => {
       const currTime = now();
@@ -276,4 +276,29 @@ export const requestAnimationFrame = /*#__PURE__*/(() => {
       }, 1000 / 60);
       return id;
     });
+})();
+
+/**
+* window.cancelAnimationFrame() method with cross browser.
+* @function
+* @memberof CrossBrowser
+* @param {number} handle - the id obtained through requestAnimationFrame method
+* @return {void}
+* @example
+import { requestAnimationFrame, cancelAnimationFrame } from "@daybrush/utils";
+
+const id = requestAnimationFrame((timestamp) => {
+  console.log(timestamp);
+});
+
+cancelAnimationFrame(id);
+*/
+export const cancelAnimationFrame = /*#__PURE__*/(() => {
+  const caf = IS_WINDOW
+    && (window.cancelAnimationFrame || window.webkitCancelAnimationFrame
+      || (window as any).mozCancelAnimationFrame || (window as any).msCancelAnimationFrame);
+
+  return caf
+      ? caf.bind(window) as (handle: number) => void
+      : ((handle: number) => { clearTimeout(handle); });
 })();
