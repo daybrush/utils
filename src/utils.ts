@@ -250,6 +250,56 @@ console.log(now()); // 12121324241(milliseconds)
 export function now() {
   return Date.now ? Date.now() : new Date().getTime();
 }
+
+/**
+* Returns the index of the first element in the array that satisfies the provided testing function.
+* @function
+* @memberof CrossBrowser
+* @param - The array `findIndex` was called upon.
+* @param - A function to execute on each value in the array until the function returns true, indicating that the satisfying element was found.
+* @param - Returns defaultIndex if not found by the function.
+* @example
+import { findIndex } from "@daybrush/utils";
+
+findIndex([{a: 1}, {a: 2}, {a: 3}, {a: 4}], ({ a }) => a === 2); // 1
+*/
+export function findIndex<T>(
+  arr: T[],
+  callback: (element: T, index: number, arr: T[]) => any,
+  defaultIndex: number = -1,
+): number {
+  const length = arr.length;
+
+  for (let i = 0; i < length; ++i) {
+    if (callback(arr[i], i, arr)) {
+      return i;
+    }
+  }
+  return defaultIndex;
+}
+
+/**
+* Returns the value of the first element in the array that satisfies the provided testing function.
+* @function
+* @memberof CrossBrowser
+* @param - The array `find` was called upon.
+* @param - A function to execute on each value in the array,
+* @param - Returns defalutValue if not found by the function.
+* @example
+import { find } from "@daybrush/utils";
+
+find([{a: 1}, {a: 2}, {a: 3}, {a: 4}], ({ a }) => a === 2); // {a: 2}
+*/
+export function find<T>(
+  arr: T[],
+  callback: (element: T, index: number, arr: T[]) => any,
+  defalutValue?: T,
+): T | undefined {
+  const index = findIndex(arr, callback);
+
+  return index > - 1 ? arr[index] : defalutValue;
+}
+
 /**
 * window.requestAnimationFrame() method with cross browser.
 * @function
