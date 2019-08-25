@@ -147,7 +147,8 @@ export function addEvent(
   el.addEventListener(type, listener, options);
 }
 
-export function removeEvent<K extends keyof IEventMap>(el: Node, type: K, listener: (e: IEventMap[K]) => void): void;
+export function removeEvent<K extends keyof IEventMap>(
+  el: EventTarget, type: K, listener: (e: IEventMap[K]) => void): void;
 /**
 * removes from the EventTarget an event listener previously registered with EventTarget.addEventListener()
 * @memberof DOM
@@ -162,6 +163,6 @@ const listener = e => {
 addEvent(el, "click", listener);
 removeEvent(el, "click", listener);
 */
-export function removeEvent(el: Node, type: string, listener: (e: Event) => void) {
+export function removeEvent(el: EventTarget, type: string, listener: (e: Event) => void) {
   el.removeEventListener(type, listener);
 }
