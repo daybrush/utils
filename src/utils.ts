@@ -1,4 +1,4 @@
-import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW } from "./consts";
+import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW, OPEN_CLOSED_CHARACTER } from "./consts";
 import { IArrayFormat, IObject } from "./types";
 /**
 * @namespace
@@ -103,6 +103,67 @@ console.log(isFunction(null)); // false
 export function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === FUNCTION;
 }
+
+function throwInvalidFormatError() {
+  throw new Error("Invalid Format");
+}
+function findClosed(closedCharacter: string, texts: string[], index: number, length: number) {
+  for (let i = index; i < length; ++i) {
+    const character = texts[i].trim();
+
+    if (character === closedCharacter) {
+      return i;
+    }
+    let nextIndex = i;
+    if (character === "(") {
+      nextIndex = findClosed(")", texts, i + 1, length);
+    } else if (OPEN_CLOSED_CHARACTER.indexOf(character) > -1) {
+      nextIndex = findClosed(character, texts, i + 1, length);
+    }
+    if (nextIndex === -1) {
+      throwInvalidFormatError();
+    }
+    i = nextIndex;
+  }
+  return -1;
+}
+function splitText(text: string, separator: string) {
+  const texts = text.split(/(\s*,\s*|\(|\)|"|'|\\"|\\'|\s+)/g).filter(Boolean);
+  const length = texts.length;
+  const values = [];
+  let tempValues = [];
+
+  for (let i = 0; i < length; ++i) {
+    const character = texts[i].trim();
+    let nextIndex = i;
+
+    if (character === "(") {
+      nextIndex = findClosed(")", texts, i + 1, length);
+    } else if (character === ")") {
+      throw new Error("invalid format");
+    } else if (OPEN_CLOSED_CHARACTER.indexOf(character) > -1) {
+      nextIndex = findClosed(character, texts, i + 1, length);
+    } else if (character === separator) {
+      if (tempValues.length) {
+        values.push(tempValues.join(""));
+        tempValues = [];
+      }
+      continue;
+    }
+
+    if (nextIndex === -1) {
+      throwInvalidFormatError();
+    } else {
+      tempValues.push(texts.slice(i, nextIndex + 1).join(""));
+    }
+    i = nextIndex;
+  }
+  if (tempValues.length) {
+    values.push(tempValues.join(""));
+  }
+  return values;
+}
+
 /**
 * divide text by space.
 * @memberof Utils
@@ -118,10 +179,9 @@ console.log(splitSpace("'a,b' c 'd,e' f g"));
 */
 export function splitSpace(text: string) {
   // divide comma(,)
-  const matches = text.match(/("[^"]*")|('[^']*')|([^\s()]*(?:\((?:[^()]*|\([^()]*\))*\))[^\s()]*)|\S+/g);
-
-  return matches || [];
+  return splitText(text, "");
 }
+
 /**
 * divide text by comma.
 * @memberof Utils
@@ -138,9 +198,7 @@ console.log(splitComma("'a,b',c,'d,e',f,g"));
 export function splitComma(text: string) {
   // divide comma(,)
   // "[^"]*"|'[^']*'
-  const matches = text.match(/("[^"]*"|'[^']*'|[^,\s()]*\((?:[^()]*|\([^()]*\))*\)[^,\s()]*|[^,])+/g);
-
-  return matches ? matches.map(str => str.trim()) : [];
+  return splitText(text, ",");
 }
 /**
 * divide text by bracket "(", ")".
@@ -179,7 +237,7 @@ console.log(splitUnit("-10px"));
 console.log(splitUnit("a10%"));
 // {prefix: "a", value: 10, unit: "%"}
 */
-export function splitUnit(text: string): {prefix: string, unit: string, value: number} {
+export function splitUnit(text: string): { prefix: string, unit: string, value: number } {
   const matches = /^([^\d|e|\-|\+]*)((?:\d|\.|-|e-|e\+)+)(\S*)$/g.exec(text);
 
   if (!matches) {
@@ -320,12 +378,12 @@ export const requestAnimationFrame = /*#__PURE__*/(() => {
       || (window as any).mozRequestAnimationFrame || (window as any).msRequestAnimationFrame);
 
   return raf ? (raf.bind(window) as (callback: FrameRequestCallback) => number) : ((callback: FrameRequestCallback) => {
-      const currTime = now();
-      const id = window.setTimeout(() => {
-        callback(currTime - firstTime);
-      }, 1000 / 60);
-      return id;
-    });
+    const currTime = now();
+    const id = window.setTimeout(() => {
+      callback(currTime - firstTime);
+    }, 1000 / 60);
+    return id;
+  });
 })();
 
 /**
@@ -349,6 +407,6 @@ export const cancelAnimationFrame = /*#__PURE__*/(() => {
       || (window as any).mozCancelAnimationFrame || (window as any).msCancelAnimationFrame);
 
   return caf
-      ? caf.bind(window) as (handle: number) => void
-      : ((handle: number) => { clearTimeout(handle); });
+    ? caf.bind(window) as (handle: number) => void
+    : ((handle: number) => { clearTimeout(handle); });
 })();

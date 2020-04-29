@@ -212,3 +212,5 @@ import {KEYFRAMES} from "@daybrush/utils";
 console.log(KEYFRAMES); // "keyframes", "-ms-keyframes", "-webkit-keyframes"
 */
 export const KEYFRAMES = /*#__PURE__*/ANIMATION.replace("animation", "keyframes");
+
+export const OPEN_CLOSED_CHARACTER = [`"`, `'`, `\\"`, `\\'`];
