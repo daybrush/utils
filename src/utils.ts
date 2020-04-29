@@ -104,9 +104,6 @@ export function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === FUNCTION;
 }
 
-function throwInvalidFormatError() {
-  throw new Error("Invalid Format");
-}
 function findClosed(closedCharacter: string, texts: string[], index: number, length: number) {
   for (let i = index; i < length; ++i) {
     const character = texts[i].trim();
@@ -121,7 +118,7 @@ function findClosed(closedCharacter: string, texts: string[], index: number, len
       nextIndex = findClosed(character, texts, i + 1, length);
     }
     if (nextIndex === -1) {
-      throwInvalidFormatError();
+      break;
     }
     i = nextIndex;
   }
@@ -152,10 +149,9 @@ function splitText(text: string, separator: string) {
     }
 
     if (nextIndex === -1) {
-      throwInvalidFormatError();
-    } else {
-      tempValues.push(texts.slice(i, nextIndex + 1).join(""));
+      nextIndex = length - 1;
     }
+    tempValues.push(texts.slice(i, nextIndex + 1).join(""));
     i = nextIndex;
   }
   if (tempValues.length) {

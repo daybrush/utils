@@ -35,11 +35,15 @@ describe("utils", () => {
     const sb1 = splitComma("a, b, c");
     const sb2 = splitComma("linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))");
     const sb3 = splitComma("-webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)))");
+    const sb4 = splitComma("'linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))");
+    const sb5 = splitComma("linear, 'left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))");
 
     // Then
     expect(sb1).to.be.deep.equals(["a", "b", "c"]);
     expect(sb2).to.be.deep.equals(["linear", "left 0", "right 0", "from(rgb(4, 94, 170))", "to(rgb(1, 152, 216))"]);
     expect(sb3).to.be.deep.equals(["-webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)))"]);
+    expect(sb4).to.be.deep.equals(["'linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))"]);
+    expect(sb5).to.be.deep.equals(["linear", "'left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))"]);
   });
   it("test splitSpace", () => {
     // Given, When
@@ -50,6 +54,7 @@ describe("utils", () => {
     const arr5 = splitSpace("   ");
     const arr6 = splitSpace(" 1  2 ");
     const arr7 = splitSpace("translate(10px) rotate(10deg)");
+    const arr8 = splitSpace("'a b c d e f g");
 
     // Then
     expect(arr).to.be.deep.equals(["a", "b", "c", "d", "e", "f", "g"]);
@@ -59,5 +64,6 @@ describe("utils", () => {
     expect(arr5).to.be.deep.equals([]);
     expect(arr6).to.be.deep.equals(["1", "2"]);
     expect(arr7).to.be.deep.equals(["translate(10px)", "rotate(10deg)"]);
+    expect(arr8).to.be.deep.equals(["'a b c d e f g"]);
   });
 });
