@@ -1,4 +1,4 @@
-import { splitBracket, splitComma, splitSpace } from "../src/index";
+import { splitBracket, splitComma, splitSpace, splitText } from "../src/index";
 
 
 describe("utils", () => {
@@ -65,5 +65,13 @@ describe("utils", () => {
     expect(arr6).to.be.deep.equals(["1", "2"]);
     expect(arr7).to.be.deep.equals(["translate(10px)", "rotate(10deg)"]);
     expect(arr8).to.be.deep.equals(["'a b c d e f g"]);
+  });
+  it("test clone, semiclone", () => {
+    // Given, When
+    const arr = splitText("url(https://www.clautic.com/league/wp-content/uploads/unicorn-wallpaper.jpg)", ":");
+    const arr2 = splitText("a:a(;);b:a", ";");
+
+    expect(arr).to.be.deep.equals(["url(https://www.clautic.com/league/wp-content/uploads/unicorn-wallpaper.jpg)"]);
+    expect(arr2).to.be.deep.equals(["a:a(;)", "b:a"]);
   });
 });

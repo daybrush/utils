@@ -124,8 +124,10 @@ function findClosed(closedCharacter: string, texts: string[], index: number, len
   }
   return -1;
 }
-function splitText(text: string, separator: string) {
-  const texts = text.split(/(\s*,\s*|\(|\)|"|'|\\"|\\'|\s+)/g).filter(Boolean);
+export function splitText(text: string, separator: string) {
+  const regexText = `(\\s*${separator || ","}\\s*|\\(|\\)|"|'|\\\\"|\\\\'|\\s+)`;
+  const regex = new RegExp(regexText, "g");
+  const texts = text.split(regex).filter(Boolean);
   const length = texts.length;
   const values = [];
   let tempValues = [];
