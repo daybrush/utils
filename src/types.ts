@@ -16,6 +16,6 @@ export interface IObject<T> {
  * @typedef
  */
 export interface IEventMap extends ElementEventMap,
-  HTMLElementEventMap, SVGElementEventMap, HTMLMediaElementEventMap, HTMLBodyElementEventMap, HTMLVideoElementEventMap {
+  HTMLElementEventMap, SVGElementEventMap, HTMLMediaElementEventMap, HTMLBodyElementEventMap {
   [name: string]: Event;
 }
