@@ -408,3 +408,14 @@ export const cancelAnimationFrame = /*#__PURE__*/(() => {
     ? caf.bind(window) as (handle: number) => void
     : ((handle: number) => { clearTimeout(handle); });
 })();
+
+export function getKeys(obj: IObject<any>): string[] {
+  if (Object.keys) {
+    return Object.keys(obj);
+  }
+  const keys: string[] = [];
+  for (const name in keys) {
+    keys.push(name);
+  }
+  return keys;
+}

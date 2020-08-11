@@ -1,6 +1,6 @@
 {
   "name": "@daybrush/utils",
-  "version": "0.10.5",
+  "version": "0.11.0",
   "description": "utils for daybrush",
   "main": "dist/utils.js",
   "module": "dist/utils.esm.js",
