@@ -10,7 +10,8 @@
 		"declarationDir": "./declaration",
 		"experimentalDecorators": true,
 		"noUnusedLocals": true,
-		"skipLibCheck": true,
+		"skipLibCheck": false,
+		"strict": true,
 		"moduleResolution": "node",
 		"lib": [
 			"es2015",

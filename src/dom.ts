@@ -29,7 +29,7 @@ import {$} from "@daybrush/utils";
 console.log($("div")); // div element
 console.log($("div", true)); // [div, div] elements
 */
-export function $<E extends Element = Element>(selectors: string, multi?: boolean): E | NodeListOf<E> {
+export function $<E extends Element = Element>(selectors: string, multi?: boolean): E | NodeListOf<E> | null {
   return multi ? document.querySelectorAll<E>(selectors) : document.querySelector<E>(selectors);
 }
 
