@@ -32,7 +32,7 @@ console.log(hexToRGBA("#00000005"));
 console.log(hexToRGBA("#201045"));
 // [32, 16, 69, 1]
 */
-export function hexToRGBA(hex: string): number[] {
+export function hexToRGBA(hex: string): [number, number, number, number] {
   const h = cutHex(hex);
   const r = parseInt(h.substring(0, 2), 16);
   const g = parseInt(h.substring(2, 4), 16);
@@ -76,7 +76,7 @@ import {hslToRGBA} from "@daybrush/utils";
 console.log(hslToRGBA([150, 0.5, 0.4]));
 // [51, 153, 102, 1]
 */
-export function hslToRGBA(hsl: number[]): number[] {
+export function hslToRGBA(hsl: readonly [number, number, number, number?]): [number, number, number, number] {
   let h = hsl[0];
   const s = hsl[1];
   const l = hsl[2];
@@ -89,7 +89,7 @@ export function hslToRGBA(hsl: number[]): number[] {
   const c = (1 - Math.abs(2 * l - 1)) * s;
   const x = c * (1 - Math.abs((h / 60) % 2 - 1));
   const m = l - c / 2;
-  let rgb;
+  let rgb: [number, number, number];
 
   if (h < 60) {
     rgb = [c, x, 0];
@@ -103,15 +103,16 @@ export function hslToRGBA(hsl: number[]): number[] {
     rgb = [x, 0, c];
   } else if (h < 360) {
     rgb = [c, 0, x];
+  } else {
+    rgb = [0, 0, 0];
   }
-  const result = [
+
+  return [
     Math.round((rgb[0] + m) * 255),
     Math.round((rgb[1] + m) * 255),
     Math.round((rgb[2] + m) * 255),
-    hsl.length > 3 ? hsl[3] : 1,
+    hsl[3] ?? 1,
   ];
-
-  return result;
 }
 /**
 * convert string to rgba color.
@@ -125,7 +126,7 @@ console.log(stringToRGBA("#000000")); // [0, 0, 0, 1]
 console.log(stringToRGBA("rgb(100, 100, 100)")); // [100, 100, 100, 1]
 console.log(stringToRGBA("hsl(150, 0.5, 0.4)")); // [51, 153, 102, 1]
 */
-export function stringToRGBA(color: string): number[] {
+export function stringToRGBA(color: string): [number, number, number, number] {
   if (color.charAt(0) === "#") {
     if (color.length === 4 || color.length === 5) {
       return hexToRGBA(toFullHex(color));
@@ -137,10 +138,10 @@ export function stringToRGBA(color: string): number[] {
     const {prefix, value} = splitBracket(color);
 
     if (!prefix || !value) {
-      return;
+      return undefined as never;
     }
     const arr = splitComma(value);
-    const colorArr: number[] = [];
+    const colorArr: [number, number, number, number] = [0, 0, 0, 1];
     const length = arr.length;
 
     switch (prefix) {
@@ -163,5 +164,5 @@ export function stringToRGBA(color: string): number[] {
         return hslToRGBA(colorArr);
     }
   }
-  return;
+  return undefined as never;
 }

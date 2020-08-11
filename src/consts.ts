@@ -134,7 +134,7 @@ import {IS_WINDOW} from "@daybrush/utils";
 console.log(IS_WINDOW); // false in node.js
 console.log(IS_WINDOW); // true in browser
 */
-const doc = typeof document !== UNDEFINED && document;
+const doc = (typeof document !== UNDEFINED && document) as Document; // FIXME: this type maybe false
 
 export {doc as document};
 
