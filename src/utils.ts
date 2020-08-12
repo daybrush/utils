@@ -420,7 +420,7 @@ export function getKeys(obj: IObject<any>): string[] {
   return keys;
 }
 
-export function sortOrders(keys: string[], orders: string[] = []) {
+export function sortOrders(keys: Array<string | number>, orders: Array<string | number> = []) {
   keys.sort((a, b) => {
       const index1 = orders.indexOf(a);
       const index2 = orders.indexOf(b);
