@@ -1,4 +1,4 @@
-import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW, OPEN_CLOSED_CHARACTER } from "./consts";
+import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW, OPEN_CLOSED_CHARACTER, NUMBER } from "./consts";
 import { IArrayFormat, IObject } from "./types";
 /**
 * @namespace
@@ -86,6 +86,11 @@ console.log(isString(null)); // false
 export function isString(value: any): value is string {
   return typeof value === STRING;
 }
+
+export function isNumber(value: any): value is number {
+  return typeof value === NUMBER;
+}
+
 /**
 * Check the type that the value is function.
 * @memberof Utils
