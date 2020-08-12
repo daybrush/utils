@@ -419,3 +419,21 @@ export function getKeys(obj: IObject<any>): string[] {
   }
   return keys;
 }
+
+export function sortOrders(keys: string[], orders: string[] = []) {
+  keys.sort((a, b) => {
+      const index1 = orders.indexOf(a);
+      const index2 = orders.indexOf(b);
+
+      if (index2 === -1 && index1 === -1) {
+          return 0;
+      }
+      if (index1 === -1) {
+          return 1;
+      }
+      if (index2 === -1) {
+          return -1;
+      }
+      return index1 - index2;
+  });
+}
