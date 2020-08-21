@@ -1,4 +1,4 @@
-import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW, OPEN_CLOSED_CHARACTER, NUMBER } from "./consts";
+import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW, OPEN_CLOSED_CHARACTER, NUMBER, DEFAULT_UNIT_PRESETS } from "./consts";
 import { IArrayFormat, IObject } from "./types";
 /**
 * @namespace
@@ -413,7 +413,10 @@ export const cancelAnimationFrame = /*#__PURE__*/(() => {
     ? caf.bind(window) as (handle: number) => void
     : ((handle: number) => { clearTimeout(handle); });
 })();
-
+/**
+* @function
+* @memberof Utils
+*/
 export function getKeys(obj: IObject<any>): string[] {
   if (Object.keys) {
     return Object.keys(obj);
@@ -425,20 +428,50 @@ export function getKeys(obj: IObject<any>): string[] {
   return keys;
 }
 
+/**
+* @function
+* @memberof Utils
+*/
 export function sortOrders(keys: Array<string | number>, orders: Array<string | number> = []) {
   keys.sort((a, b) => {
-      const index1 = orders.indexOf(a);
-      const index2 = orders.indexOf(b);
+    const index1 = orders.indexOf(a);
+    const index2 = orders.indexOf(b);
 
-      if (index2 === -1 && index1 === -1) {
-          return 0;
-      }
-      if (index1 === -1) {
-          return 1;
-      }
-      if (index2 === -1) {
-          return -1;
-      }
-      return index1 - index2;
+    if (index2 === -1 && index1 === -1) {
+      return 0;
+    }
+    if (index1 === -1) {
+      return 1;
+    }
+    if (index2 === -1) {
+      return -1;
+    }
+    return index1 - index2;
   });
+}
+
+/**
+* convert unit size to px size
+* @function
+* @memberof Utils
+*/
+export function convertUnitSize(pos: string, size: number | IObject<((pos: number) => number) | number>) {
+  const { value, unit } = splitUnit(pos);
+
+  if (isObject(size)) {
+    const sizeFunction = size[unit];
+    if (sizeFunction) {
+      if (isFunction(sizeFunction)) {
+        return sizeFunction(value);
+      } else if (DEFAULT_UNIT_PRESETS[unit]) {
+        return DEFAULT_UNIT_PRESETS[unit](value, sizeFunction);
+      }
+    }
+  } else if (unit === "%") {
+    return value * size / 100;
+  }
+  if (DEFAULT_UNIT_PRESETS[unit]) {
+    return DEFAULT_UNIT_PRESETS[unit](value);
+  }
+  return value;
 }

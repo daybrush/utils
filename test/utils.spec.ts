@@ -1,6 +1,5 @@
 import { splitBracket, splitComma, splitSpace, splitText } from "../src/index";
 
-
 describe("utils", () => {
   it("test splitBracket", () => {
     // Given, When

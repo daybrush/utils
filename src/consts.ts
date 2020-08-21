@@ -3,6 +3,8 @@
 * @name Consts
 */
 
+import { IObject } from "./types";
+
 /**
 * get string "rgb"
 * @memberof Color
@@ -214,3 +216,16 @@ console.log(KEYFRAMES); // "keyframes", "-ms-keyframes", "-webkit-keyframes"
 export const KEYFRAMES = /*#__PURE__*/ANIMATION.replace("animation", "keyframes");
 
 export const OPEN_CLOSED_CHARACTER = [`"`, `'`, `\\"`, `\\'`];
+
+export const DEFAULT_UNIT_PRESETS: IObject<(pos: number, size?: number) => number> = {
+  "cm": pos => pos * 96 / 2.54,
+  "mm": pos => pos * 96 / 254,
+  "in": pos => pos * 96,
+  "pt": pos => pos * 96 / 72,
+  "pc": pos => pos * 96 / 6,
+  "%": (pos, size) => pos * size! / 100,
+  "vw": (pos, size = window.innerWidth) => pos / 100 * size,
+  "vh": (pos, size = window.innerHeight) => pos / 100 * size,
+  "vmax": (pos, size = Math.max(window.innerWidth, window.innerHeight)) => pos / 100 * size,
+  "vmin": (pos, size = Math.min(window.innerWidth, window.innerHeight)) => pos / 100 * size,
+};
