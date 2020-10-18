@@ -475,3 +475,48 @@ export function convertUnitSize(pos: string, size: number | IObject<((pos: numbe
   }
   return value;
 }
+
+/**
+* caculate between min, max
+* @function
+* @memberof Utils
+*/
+export function between(value: number, min: number, max: number): number {
+  return Math.max(min, Math.min(value, max));
+}
+
+export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean) {
+  return [
+      [compareSize[0], compareSize[0] * targetSize[1] / targetSize[0]],
+      [compareSize[1] * targetSize[0] / targetSize[1], compareSize[1]],
+  ].filter(size => size.every((value, i) => {
+      return isMax ? value <= compareSize[i] : value >= compareSize[i];
+  }))[0] || targetSize;
+}
+
+/**
+* caculate bound size
+* @function
+* @memberof Utils
+*/
+export function caculateBoundSize(
+  size: number[], minSize: number[],
+  maxSize: number[], keepRatio?: boolean,
+): number[] {
+  if (!keepRatio) {
+      return size.map((value, i) => between(value, minSize[i], maxSize[i]));
+  }
+  let [width, height] = size;
+  // width : height = minWidth : minHeight;
+  const [minWidth, minHeight] = checkBoundSize(size, minSize, false);
+  const [maxWidth, maxHeight] = checkBoundSize(size, maxSize, true);
+
+  if (width < minWidth || height < minHeight) {
+      width = minWidth;
+      height = minHeight;
+  } else if (width > maxWidth || height > maxHeight) {
+      width = maxWidth;
+      height = maxHeight;
+  }
+  return [width, height];
+}
