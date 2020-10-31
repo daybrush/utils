@@ -1,4 +1,4 @@
-import { splitBracket, splitComma, splitSpace, splitText } from "../src/index";
+import { calculateBoundSize, splitBracket, splitComma, splitSpace, splitText } from "../src/index";
 
 describe("utils", () => {
   it("test splitBracket", () => {
@@ -72,5 +72,24 @@ describe("utils", () => {
 
     expect(arr).to.be.deep.equals(["url(https://www.clautic.com/league/wp-content/uploads/unicorn-wallpaper.jpg)"]);
     expect(arr2).to.be.deep.equals(["a:a(;)", "b:a"]);
+  });
+  it.only("test calculateBoundSize", () => {
+    const size1 = calculateBoundSize([100, 100], [0, 0], [100, 50]);
+    const size2 = calculateBoundSize([-10, 100], [0, 0], [100, 50]);
+    const size3 = calculateBoundSize([100, 100], [0, 0], [100, 50], true);
+    const size4 = calculateBoundSize([100, 100], [50, 40], [100, 50], true);
+    const size5 = calculateBoundSize([40, 100], [50, 40], [Infinity, 150], true);
+    const size6 = calculateBoundSize([0, 0], [0, 0], [Infinity, Infinity], true);
+    const size7 = calculateBoundSize([-1, -1], [0, 0], [Infinity, Infinity], true);
+
+    expect(size1).to.be.deep.equals([100, 50]);
+    expect(size2).to.be.deep.equals([0, 50]);
+    expect(size3).to.be.deep.equals([50, 50]);
+    expect(size4).to.be.deep.equals([50, 50]);
+    expect(size5).to.be.deep.equals([50, 125]);
+    expect(size6).to.be.deep.equals([0, 0]);
+    expect(size7).to.be.deep.equals([0, 0]);
+
+    console.log(size6);
   });
 });

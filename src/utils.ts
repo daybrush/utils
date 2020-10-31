@@ -134,8 +134,8 @@ export function splitText(text: string, separator: string) {
   const regex = new RegExp(regexText, "g");
   const texts = text.split(regex).filter(Boolean);
   const length = texts.length;
-  const values = [];
-  let tempValues = [];
+  const values: string[] = [];
+  let tempValues: string[] = [];
 
   for (let i = 0; i < length; ++i) {
     const character = texts[i].trim();
@@ -198,7 +198,7 @@ console.log(splitComma("a,b,c,d,e,f,g"));
 console.log(splitComma("'a,b',c,'d,e',f,g"));
 // ["'a,b'", "c", "'d,e'", "f", "g"]
 */
-export function splitComma(text: string) {
+export function splitComma(text: string): string[] {
   // divide comma(,)
   // "[^"]*"|'[^']*'
   return splitText(text, ",");
@@ -477,7 +477,7 @@ export function convertUnitSize(pos: string, size: number | IObject<((pos: numbe
 }
 
 /**
-* caculate between min, max
+* calculate between min, max
 * @function
 * @memberof Utils
 */
@@ -495,11 +495,11 @@ export function checkBoundSize(targetSize: number[], compareSize: number[], isMa
 }
 
 /**
-* caculate bound size
+* calculate bound size
 * @function
 * @memberof Utils
 */
-export function caculateBoundSize(
+export function calculateBoundSize(
   size: number[], minSize: number[],
   maxSize: number[], keepRatio?: boolean,
 ): number[] {
