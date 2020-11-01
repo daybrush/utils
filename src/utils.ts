@@ -487,10 +487,10 @@ export function between(value: number, min: number, max: number): number {
 
 export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean) {
   return [
-      [compareSize[0], compareSize[0] * targetSize[1] / targetSize[0]],
-      [compareSize[1] * targetSize[0] / targetSize[1], compareSize[1]],
+    [compareSize[0], compareSize[0] * targetSize[1] / targetSize[0]],
+    [compareSize[1] * targetSize[0] / targetSize[1], compareSize[1]],
   ].filter(size => size.every((value, i) => {
-      return isMax ? value <= compareSize[i] : value >= compareSize[i];
+    return isMax ? value <= compareSize[i] : value >= compareSize[i];
   }))[0] || targetSize;
 }
 
@@ -504,7 +504,7 @@ export function calculateBoundSize(
   maxSize: number[], keepRatio?: boolean,
 ): number[] {
   if (!keepRatio) {
-      return size.map((value, i) => between(value, minSize[i], maxSize[i]));
+    return size.map((value, i) => between(value, minSize[i], maxSize[i]));
   }
   let [width, height] = size;
   // width : height = minWidth : minHeight;
@@ -512,11 +512,75 @@ export function calculateBoundSize(
   const [maxWidth, maxHeight] = checkBoundSize(size, maxSize, true);
 
   if (width < minWidth || height < minHeight) {
-      width = minWidth;
-      height = minHeight;
+    width = minWidth;
+    height = minHeight;
   } else if (width > maxWidth || height > maxHeight) {
-      width = maxWidth;
-      height = maxHeight;
+    width = maxWidth;
+    height = maxHeight;
   }
   return [width, height];
+}
+
+
+/**
+* Add all the numbers.
+* @function
+* @memberof Utils
+*/
+export function sum(...nums: number[]): number {
+  const length = nums.length;
+  let total = 0;
+
+  for (let i = length - 1; i >= 0; --i) {
+    total += nums[i];
+  }
+  return total;
+}
+
+/**
+* Average all numbers.
+* @function
+* @memberof Utils
+*/
+export function average(...nums: number[]) {
+  const length = nums.length;
+  let total = 0;
+
+  for (let i = length - 1; i >= 0; --i) {
+    total += nums[i];
+  }
+  return length ? total / length : 0;
+}
+/**
+* Get the angle of two points. (0 <= rad < 359)
+* @function
+* @memberof Utils
+*/
+export function getRad(pos1: number[], pos2: number[]): number {
+  const distX = pos2[0] - pos1[0];
+  const distY = pos2[1] - pos1[1];
+  const rad = Math.atan2(distY, distX);
+
+  return rad >= 0 ? rad : rad + Math.PI * 2;
+}
+/**
+* Get the average point of all points.
+* @function
+* @memberof Utils
+*/
+export function getCenterPoint(points: number[][]): number[] {
+  return [0, 1].map(i => average(...points.map(pos => pos[i])));
+}
+/**
+* Gets the direction of the shape.
+* @function
+* @memberof Utils
+*/
+export function getShapeDirection(points: number[][]): 1 | -1 {
+  const center = getCenterPoint(points);
+  const pos1Rad = getRad(center, points[0]);
+  const pos2Rad = getRad(center, points[1]);
+
+  return (pos1Rad < pos2Rad && pos2Rad - pos1Rad < Math.PI) || (pos1Rad > pos2Rad && pos2Rad - pos1Rad < -Math.PI)
+    ? 1 : -1;
 }
