@@ -584,3 +584,12 @@ export function getShapeDirection(points: number[][]): 1 | -1 {
   return (pos1Rad < pos2Rad && pos2Rad - pos1Rad < Math.PI) || (pos1Rad > pos2Rad && pos2Rad - pos1Rad < -Math.PI)
     ? 1 : -1;
 }
+
+/**
+* Get the distance between two points.
+* @function
+* @memberof Utils
+*/
+export function getDist(a: number[], b?: number[]) {
+  return Math.sqrt(Math.pow((b ? b[0] : 0) - a[0], 2) + Math.pow((b ? b[1] : 0) - a[1], 2));
+}
