@@ -527,7 +527,7 @@ export function calculateBoundSize(
 * @function
 * @memberof Utils
 */
-export function sum(...nums: number[]): number {
+export function sum(nums: number[]): number {
   const length = nums.length;
   let total = 0;
 
@@ -542,7 +542,7 @@ export function sum(...nums: number[]): number {
 * @function
 * @memberof Utils
 */
-export function average(...nums: number[]) {
+export function average(nums: number[]) {
   const length = nums.length;
   let total = 0;
 
@@ -569,7 +569,7 @@ export function getRad(pos1: number[], pos2: number[]): number {
 * @memberof Utils
 */
 export function getCenterPoint(points: number[][]): number[] {
-  return [0, 1].map(i => average(...points.map(pos => pos[i])));
+  return [0, 1].map(i => average(points.map(pos => pos[i])));
 }
 /**
 * Gets the direction of the shape.
