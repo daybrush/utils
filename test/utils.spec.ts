@@ -73,7 +73,7 @@ describe("utils", () => {
     expect(arr).to.be.deep.equals(["url(https://www.clautic.com/league/wp-content/uploads/unicorn-wallpaper.jpg)"]);
     expect(arr2).to.be.deep.equals(["a:a(;)", "b:a"]);
   });
-  it.only("test calculateBoundSize", () => {
+  it("test calculateBoundSize", () => {
     const size1 = calculateBoundSize([100, 100], [0, 0], [100, 50]);
     const size2 = calculateBoundSize([-10, 100], [0, 0], [100, 50]);
     const size3 = calculateBoundSize([100, 100], [0, 0], [100, 50], true);
@@ -81,6 +81,8 @@ describe("utils", () => {
     const size5 = calculateBoundSize([40, 100], [50, 40], [Infinity, 150], true);
     const size6 = calculateBoundSize([0, 0], [0, 0], [Infinity, Infinity], true);
     const size7 = calculateBoundSize([-1, -1], [0, 0], [Infinity, Infinity], true);
+    const size8 = calculateBoundSize([30, 10], [300, 150], [Infinity, Infinity], true);
+    const size9 = calculateBoundSize([225.3628673950547, 112.68143369752735], [300, 150], [Infinity, Infinity], true);
 
     expect(size1).to.be.deep.equals([100, 50]);
     expect(size2).to.be.deep.equals([0, 50]);
@@ -89,7 +91,7 @@ describe("utils", () => {
     expect(size5).to.be.deep.equals([50, 125]);
     expect(size6).to.be.deep.equals([0, 0]);
     expect(size7).to.be.deep.equals([0, 0]);
-
-    console.log(size6);
+    expect(size8).to.be.deep.equals([450, 150]);
+    expect(size9).to.be.deep.equals([300, 150]);
   });
 });
