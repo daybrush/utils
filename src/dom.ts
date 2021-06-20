@@ -132,7 +132,7 @@ export function addEvent<K extends keyof IEventMap>(
 * @param - event target
 * @param - A case-sensitive string representing the event type to listen for.
 * @param - The object which receives a notification (an object that implements the Event interface) when an event of the specified type occurs
-* @param - An options object that specifies characteristics about the event listener. The available options are:
+* @param - An options object that specifies characteristics about the event listener.
 * @example
 import {addEvent} from "@daybrush/utils";
 
@@ -148,13 +148,14 @@ export function addEvent(
 }
 
 export function removeEvent<K extends keyof IEventMap>(
-  el: EventTarget, type: K, listener: (e: IEventMap[K]) => void): void;
+  el: EventTarget, type: K, listener: (e: IEventMap[K]) => void, options?: boolean | EventListenerOptions): void;
 /**
 * removes from the EventTarget an event listener previously registered with EventTarget.addEventListener()
 * @memberof DOM
 * @param - event target
 * @param - A case-sensitive string representing the event type to listen for.
 * @param - The EventListener function of the event handler to remove from the event target.
+* @param - An options object that specifies characteristics about the event listener.
 * @example
 import {addEvent, removeEvent} from "@daybrush/utils";
 const listener = e => {
@@ -163,6 +164,10 @@ const listener = e => {
 addEvent(el, "click", listener);
 removeEvent(el, "click", listener);
 */
-export function removeEvent(el: EventTarget, type: string, listener: (e: Event) => void) {
-  el.removeEventListener(type, listener);
+export function removeEvent(
+  el: EventTarget, type: string,
+  listener: (e: Event) => void,
+  options?: boolean | EventListenerOptions,
+) {
+  el.removeEventListener(type, listener, options);
 }
