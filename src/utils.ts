@@ -1,4 +1,10 @@
-import { UNDEFINED, STRING, OBJECT, FUNCTION, IS_WINDOW, OPEN_CLOSED_CHARACTER, NUMBER, DEFAULT_UNIT_PRESETS } from "./consts";
+import {
+  UNDEFINED, STRING,
+  OBJECT, FUNCTION,
+  IS_WINDOW, OPEN_CLOSED_CHARACTER, NUMBER,
+  DEFAULT_UNIT_PRESETS,
+  TINY_NUM
+} from "./consts";
 import { IArrayFormat, IObject } from "./types";
 /**
 * @namespace
@@ -487,8 +493,8 @@ export function between(value: number, min: number, max: number): number {
 
 export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean) {
   return [
-    [compareSize[0], compareSize[0] * targetSize[1] / targetSize[0]],
-    [compareSize[1] * targetSize[0] / targetSize[1], compareSize[1]],
+    [throttle(compareSize[0], TINY_NUM), throttle(compareSize[0] * targetSize[1] / targetSize[0], TINY_NUM)],
+    [throttle(compareSize[1] * targetSize[0] / targetSize[1], TINY_NUM), throttle(compareSize[1], TINY_NUM)],
   ].filter(size => size.every((value, i) => {
     return isMax ? value <= compareSize[i] : value >= compareSize[i];
   }))[0] || targetSize;
