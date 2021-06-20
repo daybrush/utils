@@ -593,3 +593,27 @@ export function getShapeDirection(points: number[][]): 1 | -1 {
 export function getDist(a: number[], b?: number[]) {
   return Math.sqrt(Math.pow((b ? b[0] : 0) - a[0], 2) + Math.pow((b ? b[1] : 0) - a[1], 2));
 }
+
+/**
+* throttle number depending on the unit.
+* @function
+* @memberof Utils
+*/
+export function throttle(num: number, unit?: number) {
+  if (!unit) {
+    return num;
+  }
+  return Math.round(num / unit) * unit;
+}
+
+/**
+* throttle number array depending on the unit.
+* @function
+* @memberof Utils
+*/
+export function throttleArray(nums: number[], unit?: number) {
+  nums.forEach((_, i) => {
+    nums[i] = throttle(nums[i], unit);
+  });
+  return nums;
+}
