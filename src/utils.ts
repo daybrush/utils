@@ -1,11 +1,11 @@
 import {
   UNDEFINED, STRING,
   OBJECT, FUNCTION,
-  IS_WINDOW, OPEN_CLOSED_CHARACTER, NUMBER,
+  IS_WINDOW, OPEN_CLOSED_CHARACTERS, NUMBER,
   DEFAULT_UNIT_PRESETS,
   TINY_NUM
 } from "./consts";
-import { IArrayFormat, IObject } from "./types";
+import { IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from "./types";
 /**
 * @namespace
 * @name Utils
@@ -114,19 +114,61 @@ console.log(isFunction(null)); // false
 export function isFunction(value: any): value is (...args: any[]) => any {
   return typeof value === FUNCTION;
 }
+function isEqualSeparator(
+  character: string,
+  separator: string,
+) {
+  const isCharacterSpace = character === "" || character == " ";
+  const isSeparatorSpace = separator === "" || separator == " ";
 
-function findClosed(closedCharacter: string, texts: string[], index: number, length: number) {
+  return (isSeparatorSpace && isCharacterSpace) || character === separator;
+}
+function findOpen(
+  openCharacter: OpenCloseCharacter,
+  texts: string[],
+  index: number,
+  length: number,
+  openCloseCharacters: OpenCloseCharacter[],
+) {
+  const isIgnore = findIgnore(openCharacter, texts, index);
+
+  if (!isIgnore) {
+    return findClose(openCharacter, texts, index + 1, length, openCloseCharacters);
+  }
+  return index;
+}
+function findIgnore(
+  character: OpenCloseCharacter,
+  texts: string[],
+  index: number,
+) {
+  if (!character.ignore) {
+    return null;
+  }
+  const otherText = texts.slice(Math.max(index - 3, 0), index + 3).join("");
+
+  return new RegExp(character.ignore).exec(otherText);
+
+}
+function findClose(
+  closeCharacter: OpenCloseCharacter,
+  texts: string[],
+  index: number,
+  length: number,
+  openCloseCharacters: OpenCloseCharacter[],
+) {
   for (let i = index; i < length; ++i) {
     const character = texts[i].trim();
 
-    if (character === closedCharacter) {
+    if (character === closeCharacter.close && !findIgnore(closeCharacter, texts, i)) {
       return i;
     }
     let nextIndex = i;
-    if (character === "(") {
-      nextIndex = findClosed(")", texts, i + 1, length);
-    } else if (OPEN_CLOSED_CHARACTER.indexOf(character) > -1) {
-      nextIndex = findClosed(character, texts, i + 1, length);
+    // re open
+    const openCharacter = find(openCloseCharacters, ({ open }) => open === character);
+
+    if (openCharacter) {
+      nextIndex = findOpen(openCharacter, texts, i, length, openCloseCharacters);
     }
     if (nextIndex === -1) {
       break;
@@ -135,28 +177,71 @@ function findClosed(closedCharacter: string, texts: string[], index: number, len
   }
   return -1;
 }
-export function splitText(text: string, separator: string) {
-  const regexText = `(\\s*${separator || ","}\\s*|\\(|\\)|"|'|\\\\"|\\\\'|\\s+)`;
+
+export function splitText(
+  text: string,
+  splitOptions: string | SplitOptions,
+) {
+  const {
+    separator = ",",
+    isSeparateFirst,
+    isSeparateOnlyOpenClose,
+    isSeparateOpenClose = isSeparateOnlyOpenClose,
+    openCloseCharacters = OPEN_CLOSED_CHARACTERS,
+  } = isString(splitOptions) ? {
+    separator: splitOptions,
+  } as SplitOptions : splitOptions;
+  const openClosedText = openCloseCharacters.map(({ open, close }) => {
+    if (open === close) {
+      return open;
+    }
+    return `${open}|${close}`;
+  }).join("|");
+  const regexText = `(\\s*${separator}\\s*|${openClosedText}|\\s+)`;
   const regex = new RegExp(regexText, "g");
   const texts = text.split(regex).filter(Boolean);
   const length = texts.length;
   const values: string[] = [];
   let tempValues: string[] = [];
 
+  function resetTemp() {
+    if (tempValues.length) {
+      values.push(tempValues.join(""));
+      tempValues = [];
+
+      return true;
+    }
+    return false;
+  }
   for (let i = 0; i < length; ++i) {
     const character = texts[i].trim();
     let nextIndex = i;
 
-    if (character === "(") {
-      nextIndex = findClosed(")", texts, i + 1, length);
-    } else if (character === ")") {
-      throw new Error("invalid format");
-    } else if (OPEN_CLOSED_CHARACTER.indexOf(character) > -1) {
-      nextIndex = findClosed(character, texts, i + 1, length);
-    } else if (character === separator) {
-      if (tempValues.length) {
-        values.push(tempValues.join(""));
-        tempValues = [];
+
+    const openCharacter = find(openCloseCharacters, ({ open }) => open === character);
+    const closeCharacter = find(openCloseCharacters, ({ close }) => close === character);
+
+    if (openCharacter) {
+      nextIndex = findOpen(openCharacter, texts, i, length, openCloseCharacters);
+
+      if (nextIndex !== -1 && isSeparateOpenClose) {
+        if (resetTemp() && isSeparateFirst) {
+          break;
+        }
+        values.push(texts.slice(i, nextIndex + 1).join(""));
+        i = nextIndex;
+
+        if (isSeparateFirst) {
+          break;
+        }
+        continue;
+      }
+    } else if (closeCharacter && !findIgnore(closeCharacter, texts, i)) {
+      throw new Error(`invalid format: ${closeCharacter.close}`);
+    } else if (isEqualSeparator(character, separator) && !isSeparateOnlyOpenClose) {
+      resetTemp();
+      if (isSeparateFirst) {
+        break;
       }
       continue;
     }
@@ -187,7 +272,7 @@ console.log(splitSpace("'a,b' c 'd,e' f g"));
 // ["'a,b'", "c", "'d,e'", "f", "g"]
 */
 export function splitSpace(text: string) {
-  // divide comma(,)
+  // divide comma(space)
   return splitText(text, "");
 }
 
@@ -338,6 +423,33 @@ export function findIndex<T>(
   const length = arr.length;
 
   for (let i = 0; i < length; ++i) {
+    if (callback(arr[i], i, arr)) {
+      return i;
+    }
+  }
+  return defaultIndex;
+}
+
+/**
+* Returns the reverse direction index of the first element in the array that satisfies the provided testing function.
+* @function
+* @memberof CrossBrowser
+* @param - The array `findLastIndex` was called upon.
+* @param - A function to execute on each value in the array until the function returns true, indicating that the satisfying element was found.
+* @param - Returns defaultIndex if not found by the function.
+* @example
+import { findLastIndex } from "@daybrush/utils";
+
+findLastIndex([{a: 1}, {a: 2}, {a: 3}, {a: 4}], ({ a }) => a === 2); // 1
+*/
+export function findLastIndex<T>(
+  arr: T[],
+  callback: (element: T, index: number, arr: T[]) => any,
+  defaultIndex: number = -1,
+): number {
+  const length = arr.length;
+
+  for (let i = length - 1; i >= 0; --i) {
     if (callback(arr[i], i, arr)) {
       return i;
     }
@@ -621,5 +733,15 @@ export function throttleArray(nums: number[], unit?: number) {
   nums.forEach((_, i) => {
     nums[i] = throttle(nums[i], unit);
   });
+  return nums;
+}
+
+export function counter(num: number) {
+  const nums: number[] = [];
+
+  for (let i = 0; i < num; ++i) {
+    nums.push(i);
+  }
+
   return nums;
 }

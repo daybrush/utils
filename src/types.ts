@@ -19,3 +19,19 @@ export interface IEventMap extends ElementEventMap,
   HTMLElementEventMap, SVGElementEventMap, HTMLMediaElementEventMap, HTMLBodyElementEventMap {
   [name: string]: Event;
 }
+/**
+ * @typedef
+ */
+export interface OpenCloseCharacter {
+  open: string;
+  close: string;
+  ignore?: RegExp;
+}
+
+export interface SplitOptions {
+  separator?: string;
+  isSeparateFirst?: boolean;
+  isSeparateOnlyOpenClose?: boolean,
+  isSeparateOpenClose?: boolean,
+  openCloseCharacters?: OpenCloseCharacter[],
+}

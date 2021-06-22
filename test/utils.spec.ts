@@ -1,6 +1,97 @@
-import { calculateBoundSize, splitBracket, splitComma, splitSpace, splitText } from "../src/index";
+import {
+  calculateBoundSize, OPEN_CLOSED_CHARACTERS, splitBracket,
+  splitComma, splitSpace, splitText,
+} from "../src/index";
 
 describe("utils", () => {
+  it("test splitText", () => {
+    // Given
+    const openCloseCharacters = [
+      ...OPEN_CLOSED_CHARACTERS,
+      { open: "<", close: ">", ignore: /=>|\s>\s|\s<\s/g },
+    ];
+    const text1 = `aa<div class="aa" onClick={() => {
+      return a > b;
+    }}>aa</div>aa`;
+    const text2 = `a a<div class="aa" onClick={() => {
+      return a > b;
+    }}>a a</div>aa`;
+
+    // When
+    const texts1 = splitText(text1, {
+      separator: " ",
+      isSeparateOpenClose: false,
+      openCloseCharacters,
+    });
+    const texts2 = splitText(text1, {
+      separator: " ",
+      isSeparateOpenClose: true,
+      openCloseCharacters,
+    });
+    const texts3 = splitText(text2, {
+      separator: " ",
+      isSeparateOpenClose: true,
+      openCloseCharacters,
+    });
+    const texts4 = splitText(text2, {
+      separator: " ",
+      isSeparateOnlyOpenClose: true,
+      isSeparateOpenClose: true,
+      openCloseCharacters,
+    });
+    const texts5 = splitText(text1, {
+      separator: " ",
+      isSeparateFirst: true,
+      isSeparateOnlyOpenClose: true,
+      isSeparateOpenClose: true,
+      openCloseCharacters,
+    });
+    const texts6 = splitText(text2, {
+      separator: " ",
+      isSeparateFirst: true,
+      isSeparateOnlyOpenClose: true,
+      isSeparateOpenClose: true,
+      openCloseCharacters,
+    });
+    const texts7 = splitText(text1, {
+      separator: " ",
+      isSeparateFirst: true,
+      isSeparateOnlyOpenClose: false,
+      isSeparateOpenClose: false,
+      openCloseCharacters,
+    });
+
+    // Then
+    expect(texts1[0]).to.be.deep.equals(text1);
+    expect(texts2).to.be.deep.equals([
+      `aa`,
+      `<div class="aa" onClick={() => {\n      return a > b;\n    }}>`,
+      `aa`,
+      `</div>`,
+      `aa`,
+    ]);
+    expect(texts3).to.be.deep.equals([
+      `a`,
+      `a`,
+      `<div class="aa" onClick={() => {\n      return a > b;\n    }}>`,
+      `a`,
+      `a`,
+      `</div>`,
+      `aa`,
+    ]);
+    expect(texts4).to.be.deep.equals([
+      `a a`,
+      `<div class="aa" onClick={() => {\n      return a > b;\n    }}>`,
+      `a a`,
+      `</div>`,
+      `aa`,
+    ]);
+    expect(texts5).to.be.deep.equals(["aa"]);
+    expect(texts6).to.be.deep.equals(["a a"]);
+    expect(texts7).to.be.deep.equals([`aa<div class="aa" onClick={() => {
+      return a > b;
+    }}>aa</div>aa`]);
+  });
   it("test splitBracket", () => {
     // Given, When
     // background-image: -webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)));-webkit-background-clip: text;-webkit-text-fill-color: transparent;
@@ -73,7 +164,7 @@ describe("utils", () => {
     expect(arr).to.be.deep.equals(["url(https://www.clautic.com/league/wp-content/uploads/unicorn-wallpaper.jpg)"]);
     expect(arr2).to.be.deep.equals(["a:a(;)", "b:a"]);
   });
-  it.only("test calculateBoundSize", () => {
+  it("test calculateBoundSize", () => {
     const size1 = calculateBoundSize([100, 100], [0, 0], [100, 50]);
     const size2 = calculateBoundSize([-10, 100], [0, 0], [100, 50]);
     const size3 = calculateBoundSize([100, 100], [0, 0], [100, 50], true);
@@ -89,7 +180,5 @@ describe("utils", () => {
     expect(size5).to.be.deep.equals([50, 125]);
     expect(size6).to.be.deep.equals([0, 0]);
     expect(size7).to.be.deep.equals([0, 0]);
-
-    console.log(size6);
   });
 });
