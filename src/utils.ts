@@ -458,6 +458,27 @@ export function findLastIndex<T>(
 }
 
 /**
+* Returns the value of the reverse direction element in the array that satisfies the provided testing function.
+* @function
+* @memberof CrossBrowser
+* @param - The array `findLast` was called upon.
+* @param - A function to execute on each value in the array,
+* @param - Returns defalutValue if not found by the function.
+* @example
+import { find } from "@daybrush/utils";
+
+find([{a: 1}, {a: 2}, {a: 3}, {a: 4}], ({ a }) => a === 2); // {a: 2}
+*/
+export function findLast<T>(
+  arr: T[],
+  callback: (element: T, index: number, arr: T[]) => any,
+  defalutValue?: T,
+): T | undefined {
+  const index = findLastIndex(arr, callback);
+
+  return index > - 1 ? arr[index] : defalutValue;
+}
+/**
 * Returns the value of the first element in the array that satisfies the provided testing function.
 * @function
 * @memberof CrossBrowser
@@ -736,7 +757,11 @@ export function throttleArray(nums: number[], unit?: number) {
   return nums;
 }
 
-export function counter(num: number) {
+/**
+* @function
+* @memberof Utils
+*/
+export function counter(num: number): number[] {
   const nums: number[] = [];
 
   for (let i = 0; i < num; ++i) {
@@ -744,4 +769,19 @@ export function counter(num: number) {
   }
 
   return nums;
+}
+
+/**
+* @function
+* @memberof Utils
+*/
+export function replaceOnce(text: string, fromText: RegExp | string, toText: string | ((...args: any[]) => string)): string {
+  let isOnce = false;
+  return text.replace(fromText, (...args: any[]) => {
+    if (isOnce) {
+      return args[0];
+    }
+    isOnce = true;
+    return isString(toText) ? toText : toText(...args);
+  });
 }
