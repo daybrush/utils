@@ -45,7 +45,8 @@
     "build:rollup": "rollup -c",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "doc": "rm -rf ./doc && jsdoc -c jsdoc.json",
-    "release": "npm run build && npm run doc && release --dirs=dist,doc"
+    "release": "npm run build && npm run doc && release --dirs=dist,doc",
+    "prepare": "yarn build || npm run build"
   },
   "repository": {
     "type": "git",
