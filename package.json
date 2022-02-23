@@ -1,5 +1,5 @@
 {
-  "name": "@daybrush/utils",
+  "name": "@paperflite-marketing/utils",
   "version": "1.6.0",
   "description": "utils for daybrush",
   "main": "dist/utils.js",
@@ -49,7 +49,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/daybrush/utils"
+    "url": "https://github.com/paperflite-marketing/utils.git"
   },
   "author": "Daybrush",
   "license": "MIT",

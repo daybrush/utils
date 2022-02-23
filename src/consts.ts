@@ -160,7 +160,7 @@ console.log(getCrossBrowserProperty("filter")); // "filter", "-webkit-filter"
 */
 export const getCrossBrowserProperty =  /*#__PURE__*/(property: string) => {
   if (!doc) {
-    return "";
+    return property;
   }
   const styles = (doc.body || doc.documentElement).style as any;
   const length = prefixes.length;
