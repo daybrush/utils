@@ -516,7 +516,7 @@ requestAnimationFrame((timestamp) => {
 export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
   const raf = IS_WINDOW
-    && (window.requestAnimationFrame || window.webkitRequestAnimationFrame
+    && (window.requestAnimationFrame || (window as any).webkitRequestAnimationFrame
       || (window as any).mozRequestAnimationFrame || (window as any).msRequestAnimationFrame);
 
   return raf ? (raf.bind(window) as (callback: FrameRequestCallback) => number) : ((callback: FrameRequestCallback) => {
@@ -545,7 +545,7 @@ cancelAnimationFrame(id);
 */
 export const cancelAnimationFrame = /*#__PURE__*/(() => {
   const caf = IS_WINDOW
-    && (window.cancelAnimationFrame || window.webkitCancelAnimationFrame
+    && (window.cancelAnimationFrame || (window as any).webkitCancelAnimationFrame
       || (window as any).mozCancelAnimationFrame || (window as any).msCancelAnimationFrame);
 
   return caf
