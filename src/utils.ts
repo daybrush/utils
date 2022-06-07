@@ -624,10 +624,10 @@ export function between(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(value, max));
 }
 
-export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean) {
+export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean, ratio = targetSize[0] / targetSize[1]) {
   return [
-    [throttle(compareSize[0], TINY_NUM), throttle(compareSize[0] * targetSize[1] / targetSize[0], TINY_NUM)],
-    [throttle(compareSize[1] * targetSize[0] / targetSize[1], TINY_NUM), throttle(compareSize[1], TINY_NUM)],
+    [throttle(compareSize[0], TINY_NUM), throttle(compareSize[0] / ratio, TINY_NUM)],
+    [throttle(compareSize[1] * ratio, TINY_NUM), throttle(compareSize[1], TINY_NUM)],
   ].filter(size => size.every((value, i) => {
     return isMax ? value <= compareSize[i] : value >= compareSize[i];
   }))[0] || targetSize;
@@ -639,16 +639,20 @@ export function checkBoundSize(targetSize: number[], compareSize: number[], isMa
 * @memberof Utils
 */
 export function calculateBoundSize(
-  size: number[], minSize: number[],
-  maxSize: number[], keepRatio?: boolean,
+  size: number[],
+  minSize: number[],
+  maxSize: number[],
+  keepRatio?: number | boolean,
 ): number[] {
   if (!keepRatio) {
     return size.map((value, i) => between(value, minSize[i], maxSize[i]));
   }
   let [width, height] = size;
+
+  const ratio = keepRatio === true ? width / height : keepRatio;
   // width : height = minWidth : minHeight;
-  const [minWidth, minHeight] = checkBoundSize(size, minSize, false);
-  const [maxWidth, maxHeight] = checkBoundSize(size, maxSize, true);
+  const [minWidth, minHeight] = checkBoundSize(size, minSize, false, ratio);
+  const [maxWidth, maxHeight] = checkBoundSize(size, maxSize, true, ratio);
 
   if (width < minWidth || height < minHeight) {
     width = minWidth;
