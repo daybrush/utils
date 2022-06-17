@@ -223,6 +223,7 @@ export const OPEN_CLOSED_CHARACTERS: OpenCloseCharacter[] = [
   { open: `\\'`, close: `\\'`},
 ];
 export const TINY_NUM = 0.0000001;
+export const REVERSE_TINY_NUM = 1 / TINY_NUM;
 export const DEFAULT_UNIT_PRESETS: IObject<(pos: number, size?: number) => number> = {
   "cm": pos => pos * 96 / 2.54,
   "mm": pos => pos * 96 / 254,

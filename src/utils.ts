@@ -629,7 +629,10 @@ export function checkBoundSize(targetSize: number[], compareSize: number[], isMa
     [throttle(compareSize[0], TINY_NUM), throttle(compareSize[0] / ratio, TINY_NUM)],
     [throttle(compareSize[1] * ratio, TINY_NUM), throttle(compareSize[1], TINY_NUM)],
   ].filter(size => size.every((value, i) => {
-    return isMax ? value <= compareSize[i] : value >= compareSize[i];
+    const defaultSize = compareSize[i];
+    const throttledSize = throttle(defaultSize, TINY_NUM);
+
+    return isMax ? value <= defaultSize || value <= throttledSize : value >= defaultSize || value >= throttledSize;
   }))[0] || targetSize;
 }
 
@@ -746,7 +749,8 @@ export function throttle(num: number, unit?: number) {
   if (!unit) {
     return num;
   }
-  return Math.round(num / unit) * unit;
+  const reverseUnit = 1 / unit;
+  return Math.round(num / unit) / reverseUnit;
 }
 
 /**
