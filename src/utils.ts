@@ -552,19 +552,32 @@ export const cancelAnimationFrame = /*#__PURE__*/(() => {
     ? caf.bind(window) as (handle: number) => void
     : ((handle: number) => { clearTimeout(handle); });
 })();
+
 /**
 * @function
 * @memberof Utils
 */
 export function getKeys(obj: IObject<any>): string[] {
-  if (Object.keys) {
-    return Object.keys(obj);
-  }
-  const keys: string[] = [];
-  for (const name in keys) {
-    keys.push(name);
-  }
-  return keys;
+  return Object.keys(obj);
+}
+
+/**
+* @function
+* @memberof Utils
+*/
+export function getValues(obj: IObject<any>): any[] {
+  const keys = getKeys(obj);
+
+  return keys.map(key => obj[key]);
+}
+/**
+* @function
+* @memberof Utils
+*/
+export function getEntries(obj: IObject<any>): [string, any][] {
+  const keys = getKeys(obj);
+
+  return keys.map(key => [key, obj[key]]);
 }
 
 /**
