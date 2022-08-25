@@ -181,7 +181,7 @@ function findClose(
 export function splitText(
   text: string,
   splitOptions: string | SplitOptions,
-) {
+): string[] {
   const {
     separator = ",",
     isSeparateFirst,
@@ -237,7 +237,19 @@ export function splitText(
         continue;
       }
     } else if (closeCharacter && !findIgnore(closeCharacter, texts, i)) {
-      throw new Error(`invalid format: ${closeCharacter.close}`);
+      const nextOpenCloseCharacters = [...openCloseCharacters];
+
+      nextOpenCloseCharacters.splice(openCloseCharacters.indexOf(closeCharacter), 1);
+
+      return splitText(
+        text,
+        {
+          separator,
+          isSeparateFirst,
+          isSeparateOnlyOpenClose,
+          isSeparateOpenClose,
+          openCloseCharacters: nextOpenCloseCharacters,
+        });
     } else if (isEqualSeparator(character, separator) && !isSeparateOnlyOpenClose) {
       resetTemp();
       if (isSeparateFirst) {
