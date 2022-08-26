@@ -1,8 +1,8 @@
 {
   "name": "@daybrush/utils",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "utils for daybrush",
-  "main": "dist/utils.js",
+  "main": "dist/utils.cjs.js",
   "module": "dist/utils.esm.js",
   "sideEffects": false,
   "types": "declaration/index.d.ts",
