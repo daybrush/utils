@@ -818,3 +818,14 @@ export function replaceOnce(text: string, fromText: RegExp | string, toText: str
     return isString(toText) ? toText : toText(...args);
   });
 }
+
+
+/**
+* @function
+* @memberof Utils
+*/
+export function flat<Type>(arr: Type[][]): Type[] {
+  return arr.reduce((prev, cur) => {
+      return prev.concat(cur);
+  }, []);
+}
