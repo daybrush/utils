@@ -6,6 +6,10 @@ author: Daybrush
 repository: https://github.com/daybrush/utils
 @version 1.9.1
 */
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
 /**
 * @namespace
 * @name Consts
@@ -1547,5 +1551,80 @@ function removeEvent(el, type, listener, options) {
   el.removeEventListener(type, listener, options);
 }
 
-export { RGB, RGBA, HSL, HSLA, COLOR_MODELS, FUNCTION, PROPERTY, ARRAY, OBJECT, STRING, NUMBER, UNDEFINED, IS_WINDOW, doc as document, getCrossBrowserProperty, TRANSFORM, FILTER, ANIMATION, KEYFRAMES, OPEN_CLOSED_CHARACTERS, TINY_NUM, REVERSE_TINY_NUM, DEFAULT_UNIT_PRESETS, cutHex, hexToRGBA, toFullHex, hslToRGBA, stringToRGBA, dot, isUndefined, isObject, isArray, isString, isNumber, isFunction, splitText, splitSpace, splitComma, splitBracket, splitUnit, camelize, decamelize, toArray, now, findIndex, findLastIndex, findLast, find, requestAnimationFrame, cancelAnimationFrame, getKeys, getValues, getEntries, sortOrders, convertUnitSize, between, checkBoundSize, calculateBoundSize, sum, average, getRad, getCenterPoint, getShapeDirection, getDist, throttle, throttleArray, counter, replaceOnce, flat, $, hasClass, addClass, removeClass, fromCSS, addEvent, removeEvent };
-//# sourceMappingURL=utils.esm.js.map
+exports.RGB = RGB;
+exports.RGBA = RGBA;
+exports.HSL = HSL;
+exports.HSLA = HSLA;
+exports.COLOR_MODELS = COLOR_MODELS;
+exports.FUNCTION = FUNCTION;
+exports.PROPERTY = PROPERTY;
+exports.ARRAY = ARRAY;
+exports.OBJECT = OBJECT;
+exports.STRING = STRING;
+exports.NUMBER = NUMBER;
+exports.UNDEFINED = UNDEFINED;
+exports.IS_WINDOW = IS_WINDOW;
+exports.document = doc;
+exports.getCrossBrowserProperty = getCrossBrowserProperty;
+exports.TRANSFORM = TRANSFORM;
+exports.FILTER = FILTER;
+exports.ANIMATION = ANIMATION;
+exports.KEYFRAMES = KEYFRAMES;
+exports.OPEN_CLOSED_CHARACTERS = OPEN_CLOSED_CHARACTERS;
+exports.TINY_NUM = TINY_NUM;
+exports.REVERSE_TINY_NUM = REVERSE_TINY_NUM;
+exports.DEFAULT_UNIT_PRESETS = DEFAULT_UNIT_PRESETS;
+exports.cutHex = cutHex;
+exports.hexToRGBA = hexToRGBA;
+exports.toFullHex = toFullHex;
+exports.hslToRGBA = hslToRGBA;
+exports.stringToRGBA = stringToRGBA;
+exports.dot = dot;
+exports.isUndefined = isUndefined;
+exports.isObject = isObject;
+exports.isArray = isArray;
+exports.isString = isString;
+exports.isNumber = isNumber;
+exports.isFunction = isFunction;
+exports.splitText = splitText;
+exports.splitSpace = splitSpace;
+exports.splitComma = splitComma;
+exports.splitBracket = splitBracket;
+exports.splitUnit = splitUnit;
+exports.camelize = camelize;
+exports.decamelize = decamelize;
+exports.toArray = toArray;
+exports.now = now;
+exports.findIndex = findIndex;
+exports.findLastIndex = findLastIndex;
+exports.findLast = findLast;
+exports.find = find;
+exports.requestAnimationFrame = requestAnimationFrame;
+exports.cancelAnimationFrame = cancelAnimationFrame;
+exports.getKeys = getKeys;
+exports.getValues = getValues;
+exports.getEntries = getEntries;
+exports.sortOrders = sortOrders;
+exports.convertUnitSize = convertUnitSize;
+exports.between = between;
+exports.checkBoundSize = checkBoundSize;
+exports.calculateBoundSize = calculateBoundSize;
+exports.sum = sum;
+exports.average = average;
+exports.getRad = getRad;
+exports.getCenterPoint = getCenterPoint;
+exports.getShapeDirection = getShapeDirection;
+exports.getDist = getDist;
+exports.throttle = throttle;
+exports.throttleArray = throttleArray;
+exports.counter = counter;
+exports.replaceOnce = replaceOnce;
+exports.flat = flat;
+exports.$ = $;
+exports.hasClass = hasClass;
+exports.addClass = addClass;
+exports.removeClass = removeClass;
+exports.fromCSS = fromCSS;
+exports.addEvent = addEvent;
+exports.removeEvent = removeEvent;
+//# sourceMappingURL=utils.cjs.js.map
