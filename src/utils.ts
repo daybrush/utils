@@ -5,7 +5,11 @@ import {
   DEFAULT_UNIT_PRESETS,
   TINY_NUM
 } from "./consts";
-import { IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from "./types";
+import {
+  FlattedElement,
+  IArrayFormat, IObject, OpenCloseCharacter,
+  SplitOptions,
+} from "./types";
 /**
 * @namespace
 * @name Utils
@@ -826,6 +830,21 @@ export function replaceOnce(text: string, fromText: RegExp | string, toText: str
 */
 export function flat<Type>(arr: Type[][]): Type[] {
   return arr.reduce((prev, cur) => {
-      return prev.concat(cur);
+    return prev.concat(cur);
   }, []);
+}
+
+/**
+* @function
+* @memberof Utils
+*/
+export function deepFlat<T extends any[]>(arr: T): Array<FlattedElement<T[0]>> {
+  return arr.reduce((prev, cur) => {
+    if (isArray(cur)) {
+      prev.push(...deepFlat(cur));
+    } else {
+      prev.push(cur);
+    }
+    return prev;
+  }, [] as any[]);
 }

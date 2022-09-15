@@ -35,3 +35,8 @@ export interface SplitOptions {
   isSeparateOpenClose?: boolean,
   openCloseCharacters?: OpenCloseCharacter[],
 }
+
+/**
+ * @typedef
+ */
+export type FlattedElement<T> = T extends any[] ? never : T;
