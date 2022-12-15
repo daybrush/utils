@@ -531,16 +531,18 @@ requestAnimationFrame((timestamp) => {
 */
 export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
+
   const raf = IS_WINDOW
     && (window.requestAnimationFrame || (window as any).webkitRequestAnimationFrame
       || (window as any).mozRequestAnimationFrame || (window as any).msRequestAnimationFrame);
 
   return raf ? (raf.bind(window) as (callback: FrameRequestCallback) => number) : ((callback: FrameRequestCallback) => {
     const currTime = now();
-    const id = window.setTimeout(() => {
+    const id = setTimeout(() => {
       callback(currTime - firstTime);
     }, 1000 / 60);
-    return id;
+
+    return id as any as number;
   });
 })();
 
