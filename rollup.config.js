@@ -48,6 +48,14 @@ export default [
     },
   },
   {
+    input: 'src/index.ts',
+    output: {
+      exports: "named",
+      format: "cjs",
+      file: `./dist/utils.cjs.js`,
+    },
+  },
+  {
     input: 'src/index.umd.ts',
     plugins: [es3({sourcemap: true})],
     output: {

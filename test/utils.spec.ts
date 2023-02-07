@@ -1,6 +1,6 @@
 import {
-  calculateBoundSize, OPEN_CLOSED_CHARACTERS, splitBracket,
-  splitComma, splitSpace, splitText,
+  calculateBoundSize, checkBoundSize, OPEN_CLOSED_CHARACTERS, splitBracket,
+  splitComma, splitSpace, splitText, throttle, TINY_NUM,
 } from "../src/index";
 
 describe("utils", () => {
@@ -164,6 +164,12 @@ describe("utils", () => {
     expect(arr).to.be.deep.equals(["url(https://www.clautic.com/league/wp-content/uploads/unicorn-wallpaper.jpg)"]);
     expect(arr2).to.be.deep.equals(["a:a(;)", "b:a"]);
   });
+  it("test throttle", () => {
+    expect(throttle(167.997, TINY_NUM)).to.be.equals(167.997);
+    expect(throttle(167.997, 3)).to.be.equals(168);
+    expect(throttle(167.997, 0.003)).to.be.equals(167.997);
+
+  });
   it("test calculateBoundSize", () => {
     const size1 = calculateBoundSize([100, 100], [0, 0], [100, 50]);
     const size2 = calculateBoundSize([-10, 100], [0, 0], [100, 50]);
@@ -172,6 +178,7 @@ describe("utils", () => {
     const size5 = calculateBoundSize([40, 100], [50, 40], [Infinity, 150], true);
     const size6 = calculateBoundSize([0, 0], [0, 0], [Infinity, Infinity], true);
     const size7 = calculateBoundSize([-1, -1], [0, 0], [Infinity, Infinity], true);
+    const size8 = calculateBoundSize([124, 101.8567474419186], [167.997, 137.997], [Infinity, Infinity], 124 / 101.8567474419186);
 
     expect(size1).to.be.deep.equals([100, 50]);
     expect(size2).to.be.deep.equals([0, 50]);
@@ -180,5 +187,11 @@ describe("utils", () => {
     expect(size5).to.be.deep.equals([50, 125]);
     expect(size6).to.be.deep.equals([0, 0]);
     expect(size7).to.be.deep.equals([0, 0]);
+    expect(size8).to.be.deep.equals([167.997, 137.997]);
+  });
+  it("test checkBoundSize", () => {
+    const minSize = checkBoundSize([124, 101.8567474419186], [167.997, 137.997], false, 124 / 101.856747441918);
+
+    expect(minSize).to.be.deep.equals([167.997, 137.997]);
   });
 });

@@ -1,8 +1,8 @@
 {
   "name": "@paperflite-marketing/utils",
-  "version": "1.6.0",
+  "version": "1.10.2",
   "description": "utils for daybrush",
-  "main": "dist/utils.js",
+  "main": "dist/utils.cjs.js",
   "module": "dist/utils.esm.js",
   "sideEffects": false,
   "types": "declaration/index.d.ts",

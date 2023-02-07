@@ -5,7 +5,11 @@ import {
   DEFAULT_UNIT_PRESETS,
   TINY_NUM
 } from "./consts";
-import { IArrayFormat, IObject, OpenCloseCharacter, SplitOptions } from "./types";
+import {
+  FlattedElement,
+  IArrayFormat, IObject, OpenCloseCharacter,
+  SplitOptions,
+} from "./types";
 /**
 * @namespace
 * @name Utils
@@ -181,7 +185,7 @@ function findClose(
 export function splitText(
   text: string,
   splitOptions: string | SplitOptions,
-) {
+): string[] {
   const {
     separator = ",",
     isSeparateFirst,
@@ -237,7 +241,19 @@ export function splitText(
         continue;
       }
     } else if (closeCharacter && !findIgnore(closeCharacter, texts, i)) {
-      throw new Error(`invalid format: ${closeCharacter.close}`);
+      const nextOpenCloseCharacters = [...openCloseCharacters];
+
+      nextOpenCloseCharacters.splice(openCloseCharacters.indexOf(closeCharacter), 1);
+
+      return splitText(
+        text,
+        {
+          separator,
+          isSeparateFirst,
+          isSeparateOnlyOpenClose,
+          isSeparateOpenClose,
+          openCloseCharacters: nextOpenCloseCharacters,
+        });
     } else if (isEqualSeparator(character, separator) && !isSeparateOnlyOpenClose) {
       resetTemp();
       if (isSeparateFirst) {
@@ -515,16 +531,18 @@ requestAnimationFrame((timestamp) => {
 */
 export const requestAnimationFrame = /*#__PURE__*/(() => {
   const firstTime = now();
+
   const raf = IS_WINDOW
-    && (window.requestAnimationFrame || window.webkitRequestAnimationFrame
+    && (window.requestAnimationFrame || (window as any).webkitRequestAnimationFrame
       || (window as any).mozRequestAnimationFrame || (window as any).msRequestAnimationFrame);
 
   return raf ? (raf.bind(window) as (callback: FrameRequestCallback) => number) : ((callback: FrameRequestCallback) => {
     const currTime = now();
-    const id = window.setTimeout(() => {
+    const id = setTimeout(() => {
       callback(currTime - firstTime);
     }, 1000 / 60);
-    return id;
+
+    return id as any as number;
   });
 })();
 
@@ -545,26 +563,39 @@ cancelAnimationFrame(id);
 */
 export const cancelAnimationFrame = /*#__PURE__*/(() => {
   const caf = IS_WINDOW
-    && (window.cancelAnimationFrame || window.webkitCancelAnimationFrame
+    && (window.cancelAnimationFrame || (window as any).webkitCancelAnimationFrame
       || (window as any).mozCancelAnimationFrame || (window as any).msCancelAnimationFrame);
 
   return caf
     ? caf.bind(window) as (handle: number) => void
     : ((handle: number) => { clearTimeout(handle); });
 })();
+
 /**
 * @function
 * @memberof Utils
 */
 export function getKeys(obj: IObject<any>): string[] {
-  if (Object.keys) {
-    return Object.keys(obj);
-  }
-  const keys: string[] = [];
-  for (const name in keys) {
-    keys.push(name);
-  }
-  return keys;
+  return Object.keys(obj);
+}
+
+/**
+* @function
+* @memberof Utils
+*/
+export function getValues(obj: IObject<any>): any[] {
+  const keys = getKeys(obj);
+
+  return keys.map(key => obj[key]);
+}
+/**
+* @function
+* @memberof Utils
+*/
+export function getEntries(obj: IObject<any>): [string, any][] {
+  const keys = getKeys(obj);
+
+  return keys.map(key => [key, obj[key]]);
 }
 
 /**
@@ -624,12 +655,15 @@ export function between(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(value, max));
 }
 
-export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean) {
+export function checkBoundSize(targetSize: number[], compareSize: number[], isMax: boolean, ratio = targetSize[0] / targetSize[1]) {
   return [
-    [throttle(compareSize[0], TINY_NUM), throttle(compareSize[0] * targetSize[1] / targetSize[0], TINY_NUM)],
-    [throttle(compareSize[1] * targetSize[0] / targetSize[1], TINY_NUM), throttle(compareSize[1], TINY_NUM)],
+    [throttle(compareSize[0], TINY_NUM), throttle(compareSize[0] / ratio, TINY_NUM)],
+    [throttle(compareSize[1] * ratio, TINY_NUM), throttle(compareSize[1], TINY_NUM)],
   ].filter(size => size.every((value, i) => {
-    return isMax ? value <= compareSize[i] : value >= compareSize[i];
+    const defaultSize = compareSize[i];
+    const throttledSize = throttle(defaultSize, TINY_NUM);
+
+    return isMax ? value <= defaultSize || value <= throttledSize : value >= defaultSize || value >= throttledSize;
   }))[0] || targetSize;
 }
 
@@ -639,16 +673,20 @@ export function checkBoundSize(targetSize: number[], compareSize: number[], isMa
 * @memberof Utils
 */
 export function calculateBoundSize(
-  size: number[], minSize: number[],
-  maxSize: number[], keepRatio?: boolean,
+  size: number[],
+  minSize: number[],
+  maxSize: number[],
+  keepRatio?: number | boolean,
 ): number[] {
   if (!keepRatio) {
     return size.map((value, i) => between(value, minSize[i], maxSize[i]));
   }
   let [width, height] = size;
+
+  const ratio = keepRatio === true ? width / height : keepRatio;
   // width : height = minWidth : minHeight;
-  const [minWidth, minHeight] = checkBoundSize(size, minSize, false);
-  const [maxWidth, maxHeight] = checkBoundSize(size, maxSize, true);
+  const [minWidth, minHeight] = checkBoundSize(size, minSize, false, ratio);
+  const [maxWidth, maxHeight] = checkBoundSize(size, maxSize, true, ratio);
 
   if (width < minWidth || height < minHeight) {
     width = minWidth;
@@ -742,7 +780,8 @@ export function throttle(num: number, unit?: number) {
   if (!unit) {
     return num;
   }
-  return Math.round(num / unit) * unit;
+  const reverseUnit = 1 / unit;
+  return Math.round(num / unit) / reverseUnit;
 }
 
 /**
@@ -784,4 +823,30 @@ export function replaceOnce(text: string, fromText: RegExp | string, toText: str
     isOnce = true;
     return isString(toText) ? toText : toText(...args);
   });
+}
+
+
+/**
+* @function
+* @memberof Utils
+*/
+export function flat<Type>(arr: Type[][]): Type[] {
+  return arr.reduce((prev, cur) => {
+    return prev.concat(cur);
+  }, []);
+}
+
+/**
+* @function
+* @memberof Utils
+*/
+export function deepFlat<T extends any[]>(arr: T): Array<FlattedElement<T[0]>> {
+  return arr.reduce((prev, cur) => {
+    if (isArray(cur)) {
+      prev.push(...deepFlat(cur));
+    } else {
+      prev.push(cur);
+    }
+    return prev;
+  }, [] as any[]);
 }
