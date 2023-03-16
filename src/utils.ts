@@ -373,7 +373,7 @@ console.log(camelize("abcd_efg")); // abcdEfg
 console.log(camelize("abcd efg")); // abcdEfg
 */
 export function camelize(str: string) {
-  return str.replace(/[\s-_]([a-z])/g, (all, letter) => letter.toUpperCase());
+  return str.replace(/[\s-_]+([^\s-_])/g, (all, letter) => letter.toUpperCase());
 }
 /**
 * transform a camelized string into a lowercased string.
