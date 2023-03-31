@@ -127,6 +127,7 @@ describe("utils", () => {
     const sb3 = splitComma("-webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)))");
     const sb4 = splitComma("'linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))");
     const sb5 = splitComma("linear, 'left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))");
+    const sb6 = splitComma(".item > a.link, .item > a.link:hover {");
 
     // Then
     expect(sb1).to.be.deep.equals(["a", "b", "c"]);
@@ -134,6 +135,7 @@ describe("utils", () => {
     expect(sb3).to.be.deep.equals(["-webkit-gradient(linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216)))"]);
     expect(sb4).to.be.deep.equals(["'linear, left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))"]);
     expect(sb5).to.be.deep.equals(["linear", "'left 0, right 0, from(rgb(4, 94, 170)), to(rgb(1, 152, 216))"]);
+    expect(sb6).to.be.deep.equals([".item > a.link", ".item > a.link:hover {"]);
   });
   it("test splitSpace", () => {
     // Given, When

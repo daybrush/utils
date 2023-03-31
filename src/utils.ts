@@ -203,7 +203,9 @@ export function splitText(
   }).join("|");
   const regexText = `(\\s*${separator}\\s*|${openClosedText}|\\s+)`;
   const regex = new RegExp(regexText, "g");
-  const texts = text.split(regex).filter(Boolean);
+  const texts = text.split(regex).filter(chr => {
+    return chr && chr !== "undefined";
+  });
   const length = texts.length;
   const values: string[] = [];
   let tempValues: string[] = [];
