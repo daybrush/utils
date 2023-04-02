@@ -852,3 +852,14 @@ export function deepFlat<T extends any[]>(arr: T): Array<FlattedElement<T[0]>> {
     return prev;
   }, [] as any[]);
 }
+
+
+/**
+ * @function
+ * @memberof Utils
+ */
+export function pushSet<T>(elements: T[], element: T) {
+  if (elements.indexOf(element) === -1) {
+    elements.push(element);
+  }
+}
