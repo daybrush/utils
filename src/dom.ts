@@ -174,3 +174,20 @@ export function removeEvent(
 ) {
   el.removeEventListener(type, listener, options);
 }
+
+
+export function getDocument(el?: Node) {
+  return el?.ownerDocument || document;
+}
+
+export function getDocumentElement(el?: Node) {
+  return getDocument(el).documentElement;
+}
+
+export function getDocumenBody(el?: Node) {
+  return getDocument(el).body;
+}
+
+export function getWindow(el?: Node) {
+  return el?.ownerDocument?.defaultView || window;
+}
