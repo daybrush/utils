@@ -118,7 +118,7 @@ export function fromCSS(
     return {};
   }
   const cssObject: IObject<any> = {};
-  const styles = window.getComputedStyle(element) as any;
+  const styles = getWindow(element).getComputedStyle(element) as any;
   const length = properties.length;
 
   for (let i = 0; i < length; ++i) {
