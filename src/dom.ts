@@ -199,5 +199,9 @@ export function isWindow(val: any): val is Window {
 }
 
 export function isNode(el?: any): el is Node {
-  return isObject(el) && el.nodeName && el.nodeType && "ownerDocument" in el;
+  return isObject(el)
+    && el.nodeName
+    && el.nodeType
+    && "parentNode" in el
+    && "ownerDocument" in el;
 }
