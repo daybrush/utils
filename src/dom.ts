@@ -184,7 +184,7 @@ export function getDocumentElement(el?: Node) {
   return getDocument(el).documentElement;
 }
 
-export function getDocumenBody(el?: Node) {
+export function getDocumentBody(el?: Node) {
   return getDocument(el).body;
 }
 
