@@ -1,5 +1,6 @@
 import { document } from "./consts";
 import { IObject, IEventMap } from "./types";
+import { isObject } from "./utils";
 
 /**
  * @namespace DOM
@@ -190,4 +191,13 @@ export function getDocumentBody(el?: Node) {
 
 export function getWindow(el?: Node) {
   return el?.ownerDocument?.defaultView || window;
+}
+
+
+export function isWindow(val: any): val is Window {
+  return val && "postMessage" in val && "blur" in val && "self" in val;
+}
+
+export function isNode(el?: any): el is Node {
+  return isObject(el) && el.nodeName && el.nodeType && "ownerDocument" in el;
 }
